@@ -6,7 +6,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\Renderer\PhpRenderer;
 use Zend\EventManager\SharedEventManagerInterface;
 
-class Sharing extends AbstractModule
+class Module extends AbstractModule
 {
     public function attachListeners(SharedEventManagerInterface $sharedEventManager)
     {
