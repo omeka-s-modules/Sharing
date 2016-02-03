@@ -108,21 +108,37 @@ class Module extends AbstractModule
         $view->headMeta()->appendProperty('og:title', $view->headTitle()->renderTitle());
         $view->headMeta()->appendProperty('og:type', 'website');
         $view->headMeta()->appendProperty('og:url', $view->serverUrl(true));
+        $js = "var sharingUrl = '" . $view->serverUrl(true) . "';";
+        $view->headScript()->appendScript($js);
         
-    }
-    
-    public function insertJavascript($event)
-    {
-        if ($this->siteSettings->get('sharing_enable')) {
-            echo "<script type='text/javascript'> alert('hello'); </script>";
-        }
     }
     
     public function viewShowAfter($event)
     {
         $view = $event->getTarget();
+        $view->headScript()->appendFile($view->assetUrl('js/sharing.js', 'Sharing'));
         $escape = $view->plugin('escapeHtml');
         $translator = $this->getServiceLocator()->get('MvcTranslator');
         echo $view->partial('share-buttons', array('escape' => $escape, 'translator' => $translator));
+        
+        $fbJavascript = "
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              xfbml      : true,
+              version    : 'v2.5'
+            });
+          };
+        
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = '//connect.facebook.net/en_US/sdk.js';
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+        ";
+        echo $fbJavascript;
     }
 }
