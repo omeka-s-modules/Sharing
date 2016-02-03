@@ -67,19 +67,49 @@ class Module extends AbstractModule
     
     public function insertOpenGraphData($event)
     {
+        $routeMatch = $this->getServiceLocator()->get('Application')
+                        ->getMvcEvent()->getRouteMatch();
+        $controller = $routeMatch->getParam('controller');
+        echo $controller;
+        
         $view = $event->getTarget();
         $escape = $view->plugin('escapeHtml');
-        if (isset($view->item)) {
-            $description = $escape($view->item->displayDescription());
-            $view->headMeta()->appendProperty('og:description', $description);
-            if ($primaryMedia = $view->item->primaryMedia()) {
-                $image = $escape($primaryMedia->thumbnailUrl('square'));
+        switch  ($controller) {
+            case 'Omeka\Controller\Site\Item' :
+                $description = $escape($view->item->displayDescription());
+                $view->headMeta()->appendProperty('og:description', $description);
+                if ($primaryMedia = $view->item->primaryMedia()) {
+                    $image = $escape($primaryMedia->thumbnailUrl('square'));
+                    $view->headMeta()->appendProperty('og:image', $image);
+                }
+            break;
+                
+            case 'Omeka\Controller\Site\Index':
+                $description = '';
+                $image = '';
+                $view->headMeta()->appendProperty('og:description', $description);
                 $view->headMeta()->appendProperty('og:image', $image);
-            }
+            break;
+                
+            case 'Omeka\Controller\Site\Page':
+                // need to figure out how to handle the different block types and finding an image
+                $description = '';
+                $block = $view->page->blocks()[0];
+                $attachment = $block->attachments()[0];
+                $item = $attachment->item();
+                if ($primaryMedia = $item->primaryMedia()) {
+                    $image = $escape($primaryMedia->thumbnailUrl('square'));
+                    $view->headMeta()->appendProperty('og:image', $image);
+                }
+                $image = '';
+                $view->headMeta()->appendProperty('og:description', $description);
+                $view->headMeta()->appendProperty('og:image', $image);
+            break;
         }
         $view->headMeta()->appendProperty('og:title', $view->headTitle()->renderTitle());
         $view->headMeta()->appendProperty('og:type', 'website');
         $view->headMeta()->appendProperty('og:url', $view->serverUrl(true));
+        
     }
     
     public function insertJavascript($event)
