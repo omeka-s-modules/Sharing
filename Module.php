@@ -70,7 +70,6 @@ class Module extends AbstractModule
         $routeMatch = $this->getServiceLocator()->get('Application')
                         ->getMvcEvent()->getRouteMatch();
         $controller = $routeMatch->getParam('controller');
-        echo $controller;
         
         $view = $event->getTarget();
         $escape = $view->plugin('escapeHtml');
