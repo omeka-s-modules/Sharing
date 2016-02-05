@@ -75,6 +75,8 @@ class Module extends AbstractModule
             
             $view = $event->getTarget();
             $escape = $view->plugin('escapeHtml');
+            $description = false;
+            $image = false;
             switch  ($controller) {
                 case 'Omeka\Controller\Site\Item' :
                     $description = $escape($view->item->displayDescription());
@@ -85,31 +87,33 @@ class Module extends AbstractModule
                     }
                 break;
                     
+                //does this ever go on the public side?
                 case 'Omeka\Controller\Site\Index':
-                    $description = '';
-                    $image = '';
-                    $view->headMeta()->appendProperty('og:description', $description);
-                    $view->headMeta()->appendProperty('og:image', $image);
+//                    $description = '';
+//                    $image = '';
                 break;
                     
                 case 'Omeka\Controller\Site\Page':
                     // need to figure out how to handle the different block types and finding an image
-                    $description = '';
+
                     $block = $view->page->blocks()[0];
                     $attachment = $block->attachments()[0];
                     $item = $attachment->item();
                     if ($primaryMedia = $item->primaryMedia()) {
                         $image = $escape($primaryMedia->thumbnailUrl('square'));
-                        $view->headMeta()->appendProperty('og:image', $image);
                     }
-                    $image = '';
-                    $view->headMeta()->appendProperty('og:description', $description);
-                    $view->headMeta()->appendProperty('og:image', $image);
                 break;
             }
             $view->headMeta()->appendProperty('og:title', $view->headTitle()->renderTitle());
             $view->headMeta()->appendProperty('og:type', 'website');
             $view->headMeta()->appendProperty('og:url', $view->serverUrl(true));
+            if ($description) {
+                $view->headMeta()->appendProperty('og:description', $description);
+            }
+            
+            if ($image) {
+                $view->headMeta()->appendProperty('og:image', $image);
+            }
         }
     }
     
@@ -150,7 +154,7 @@ class Module extends AbstractModule
             </script>
             ";
             
-            $pinterstJavascript = '
+            $pinterestJavascript = '
             
                 <script
                     type="text/javascript"
