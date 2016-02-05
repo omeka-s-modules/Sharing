@@ -108,15 +108,12 @@ class Module extends AbstractModule
         $view->headMeta()->appendProperty('og:title', $view->headTitle()->renderTitle());
         $view->headMeta()->appendProperty('og:type', 'website');
         $view->headMeta()->appendProperty('og:url', $view->serverUrl(true));
-        $js = "var sharingUrl = '" . $view->serverUrl(true) . "';";
-        $view->headScript()->appendScript($js);
-        
     }
     
     public function viewShowAfter($event)
     {
         $view = $event->getTarget();
-        $view->headScript()->appendFile($view->assetUrl('js/sharing.js', 'Sharing'));
+        $view->headScript()->appendFile('https://platform.twitter.com/widgets.js');
         $escape = $view->plugin('escapeHtml');
         $translator = $this->getServiceLocator()->get('MvcTranslator');
         echo $view->partial('share-buttons', array('escape' => $escape, 'translator' => $translator));
@@ -140,5 +137,23 @@ class Module extends AbstractModule
         </script>
         ";
         echo $fbJavascript;
+        
+        $pinterstJavascript = '
+        
+            <script
+                type="text/javascript"
+                async defer
+                src="//assets.pinterest.com/js/pinit.js"
+            ></script>
+        
+        ';
+        echo $pinterstJavascript;
+        
+        $tumblrJavascript = '
+            <script id="tumblr-js" async src="https://assets.tumblr.com/share-button.js"></script>
+        ';
+        
+        echo $tumblrJavascript;
+        
     }
 }

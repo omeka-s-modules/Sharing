@@ -1,7 +1,24 @@
 <ul id='sharing-buttons'>
-<li id='sharing-fb' class='sharing-button'><?php echo $translator->translate('Facebook'); ?></li>
-<li id='sharing-twitter' class='sharing-button'><?php echo $translator->translate('Twitter'); ?></li>
-<li id='sharing-pinterest' class='sharing-button'><?php echo $translator->translate('Pinterest'); ?></li>
-<li id='sharing-tumblr' class='sharing-button'><?php echo $translator->translate('Tumblr'); ?></li>
-<li id='sharing-email' class='sharing-button'><?php echo $translator->translate('Email'); ?></li>
+    <li id='sharing-fb' class='sharing-button'>
+        <div class="fb-share-button" 
+            data-href="<?php echo $this->serverUrl(true); ?>"
+            data-layout="button">
+        </div>
+    </li>
+    <li id='sharing-twitter' class='sharing-button'>
+        <a href="https://twitter.com/share" class="twitter-share-button"></a>
+    </li>
+    <li id='sharing-pinterest' class='sharing-button'>
+        <a data-pin-do="buttonBookmark" href="https://www.pinterest.com/pin/create/button/"></a>
+    </li>
+    <li id='sharing-tumblr' class='sharing-button'>
+        <a class="tumblr-share-button" 
+           data-color="blue" 
+           href="https://embed.tumblr.com/share">
+       </a>
+    </li>
+    <li id='sharing-email' class='sharing-button'><?php echo $translator->translate('Email'); ?>
+        <a></a>
+    </li>
 </ul>
+
