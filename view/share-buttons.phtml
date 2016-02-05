@@ -1,24 +1,34 @@
 <ul id='sharing-buttons'>
+    <?php if(in_array('fb', $enabledMethods)) :?>
     <li id='sharing-fb' class='sharing-button'>
         <div class="fb-share-button" 
             data-href="<?php echo $this->serverUrl(true); ?>"
             data-layout="button">
         </div>
     </li>
+    <?php endif; ?>
+    <?php if(in_array('twitter', $enabledMethods)) :?>
     <li id='sharing-twitter' class='sharing-button'>
         <a href="https://twitter.com/share" class="twitter-share-button"></a>
     </li>
+    <?php endif; ?>
+    <?php if(in_array('pinterest', $enabledMethods)) :?>
     <li id='sharing-pinterest' class='sharing-button'>
         <a data-pin-do="buttonBookmark" href="https://www.pinterest.com/pin/create/button/"></a>
     </li>
+    <?php endif; ?>
+    <?php if(in_array('tumblr', $enabledMethods)) :?>
     <li id='sharing-tumblr' class='sharing-button'>
         <a class="tumblr-share-button" 
            data-color="blue" 
            href="https://embed.tumblr.com/share">
        </a>
     </li>
+    <?php endif; ?>
+    <?php if(in_array('email', $enabledMethods)) :?>
     <li id='sharing-email' class='sharing-button'>
         <a><?php echo $translator->translate('Email'); ?></a>
     </li>
+    <?php endif; ?>
 </ul>
 

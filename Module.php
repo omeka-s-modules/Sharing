@@ -45,16 +45,24 @@ class Module extends AbstractModule
         $siteSettings = $this->getServiceLocator()->get('Omeka\SiteSettings');
         $form = $event->getParam('form');
         $translator = $form->getTranslator();
+        
+        $enabledMethods = $siteSettings->get('sharing_methods', array());
         $form->add([
-            'name' => 'sharing_enable',
-            'type' => 'checkbox',
+            'name' => 'sharing_methods',
+            'type' => 'multi_checkbox',
             'options' => [
-                'label' => $translator->translate('Enable the Sharing module for this site.'),
+                'label' => $translator->translate('Enable Sharing module for these methods'),
+                'value_options' => [
+                    'fb'        => $translator->translate('Facebook'),
+                    'twitter'   => $translator->translate('Twitter'),
+                    'tumblr'    => $translator->translate('Tumblr'),
+                    'pinterest' => $translator->translate('Pinterest'),
+                    'email' => $translator->translate('Email'),
+                ]
+
             ],
-            'attributes' => [
-                'value' => (bool) $siteSettings->get('sharing_enable', false)
-            ]
         ]);
+
     }
     
     public function insertOpenGraphData($event)
@@ -109,14 +117,19 @@ class Module extends AbstractModule
     {
         
         $siteSettings = $this->getServiceLocator()->get('Omeka\SiteSettings');
-        if ($siteSettings->get('sharing_enable')) {
-            $enabledSites = $siteSettings->get('sharing_sites');
+        $enabledMethods = $siteSettings->get('sharing_methods');
+        if (! empty($enabledMethods)) {
+            
             $view = $event->getTarget();
             $view->headScript()->appendFile('https://platform.twitter.com/widgets.js');
             $view->headLink()->appendStylesheet($view->assetUrl('css/sharing.css', 'Sharing'));
             $escape = $view->plugin('escapeHtml');
             $translator = $this->getServiceLocator()->get('MvcTranslator');
-            echo $view->partial('share-buttons', array('escape' => $escape, 'translator' => $translator));
+            echo $view->partial('share-buttons',
+                    array('escape' => $escape,
+                          'translator' => $translator,
+                          'enabledMethods' => $enabledMethods)
+                    );
             
             $fbJavascript = "
             <script>
@@ -151,9 +164,11 @@ class Module extends AbstractModule
                 <script id="tumblr-js" async src="https://assets.tumblr.com/share-button.js"></script>
             ';
             
-            foreach($enabledSites as $site) {
-                $js = $site . 'Javascript';
-                echo $js;
+            foreach($enabledMethods as $method) {
+                $js = $method . 'Javascript';
+                if (isset($$js)) {
+                    echo $$js;
+                }
             }
         }
     }
