@@ -9,3 +9,7 @@ li.sharing-button {
 .fb-share-button span {
     vertical-align: unset !important;
 }
+
+li#sharing-pinterest span {
+    vertical-align: unset !important;
+}
