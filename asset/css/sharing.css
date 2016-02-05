@@ -13,3 +13,9 @@ li.sharing-button {
 li#sharing-pinterest span {
     vertical-align: unset !important;
 }
+
+li#sharing-email {
+    font-size: 13px;
+    vertical-align: top;
+    line-height: 1em;
+}
