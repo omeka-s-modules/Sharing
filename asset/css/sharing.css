@@ -1,0 +1,11 @@
+ul#sharing-buttons {
+    list-style: none;
+}
+
+li.sharing-button {
+    display: inline-block;
+}
+
+.fb-share-button span {
+    vertical-align: unset !important;
+}

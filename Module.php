@@ -114,6 +114,7 @@ class Module extends AbstractModule
     {
         $view = $event->getTarget();
         $view->headScript()->appendFile('https://platform.twitter.com/widgets.js');
+        $view->headLink()->appendStylesheet($view->assetUrl('css/sharing.css', 'Sharing'));
         $escape = $view->plugin('escapeHtml');
         $translator = $this->getServiceLocator()->get('MvcTranslator');
         echo $view->partial('share-buttons', array('escape' => $escape, 'translator' => $translator));
