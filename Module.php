@@ -53,13 +53,33 @@ class Module extends AbstractModule
             'options' => [
                 'label' => $translator->translate('Enable Sharing module for these methods'),
                 'value_options' => [
-                    'fb'        => $translator->translate('Facebook'),
-                    'twitter'   => $translator->translate('Twitter'),
-                    'tumblr'    => $translator->translate('Tumblr'),
-                    'pinterest' => $translator->translate('Pinterest'),
-                    'email' => $translator->translate('Email'),
-                ]
-
+                    'fb'        => [
+                                    'label' => $translator->translate('Facebook'),
+                                    'value' => 'fb',
+                                    'selected' => (bool) in_array('fb', $enabledMethods),
+                                    ],
+                    'twitter'   => [
+                                    'label' => $translator->translate('Twitter'),
+                                    'value' => 'twitter',
+                                    'selected' => (bool) in_array('twitter', $enabledMethods),
+                                   ],
+                    'tumblr'    => [
+                                    'label' => $translator->translate('Tumblr'),
+                                    'value' => 'tumblr',
+                                    'selected' => (bool) in_array('tumblr', $enabledMethods),
+                                   ],
+                    'pinterest' => [
+                                    'label' => $translator->translate('Pinterest'),
+                                    'value' => 'pinterest',
+                                    'selected' => (bool) in_array('pinterest', $enabledMethods),
+                                   ],
+                    'email'     => [
+                                    'label' => $translator->translate('Email'),
+                                    'value' => 'email',
+                                    'selected' => (bool) in_array('email', $enabledMethods),
+                                   ],
+                    
+                ],
             ],
         ]);
 
