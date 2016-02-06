@@ -56,27 +56,27 @@ class Module extends AbstractModule
                     'fb'        => [
                                     'label' => $translator->translate('Facebook'),
                                     'value' => 'fb',
-                                    'selected' => (bool) in_array('fb', $enabledMethods),
+                                    'selected' => in_array('fb', $enabledMethods),
                                     ],
                     'twitter'   => [
                                     'label' => $translator->translate('Twitter'),
                                     'value' => 'twitter',
-                                    'selected' => (bool) in_array('twitter', $enabledMethods),
+                                    'selected' => in_array('twitter', $enabledMethods),
                                    ],
                     'tumblr'    => [
                                     'label' => $translator->translate('Tumblr'),
                                     'value' => 'tumblr',
-                                    'selected' => (bool) in_array('tumblr', $enabledMethods),
+                                    'selected' => in_array('tumblr', $enabledMethods),
                                    ],
                     'pinterest' => [
                                     'label' => $translator->translate('Pinterest'),
                                     'value' => 'pinterest',
-                                    'selected' => (bool) in_array('pinterest', $enabledMethods),
+                                    'selected' => in_array('pinterest', $enabledMethods),
                                    ],
                     'email'     => [
                                     'label' => $translator->translate('Email'),
                                     'value' => 'email',
-                                    'selected' => (bool) in_array('email', $enabledMethods),
+                                    'selected' => in_array('email', $enabledMethods),
                                    ],
                     
                 ],
