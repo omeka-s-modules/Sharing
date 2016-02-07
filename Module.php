@@ -48,9 +48,9 @@ class Module extends AbstractModule
         
         $enabledMethods = $siteSettings->get('sharing_methods', array());
         $form->add([
-            'name' => 'sharing_methods',
-            'type' => 'multi_checkbox',
-            'options' => [
+            'name'     => 'sharing_methods',
+            'type'     => 'multi_checkbox',
+            'options'  => [
                 'label' => $translator->translate('Enable Sharing module for these methods'),
                 'value_options' => [
                     'fb'        => [
@@ -78,9 +78,14 @@ class Module extends AbstractModule
                                     'value' => 'email',
                                     'selected' => in_array('email', $enabledMethods),
                                    ],
-                    
                 ],
             ],
+        ]);
+
+        $inputFilter = $form->getInputFilter();
+        $inputFilter->add([
+            'name'     => 'sharing_methods',
+            'required' => false,
         ]);
 
     }
