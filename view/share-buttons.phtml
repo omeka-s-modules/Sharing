@@ -1,3 +1,8 @@
+<?php
+$pageTitle = $this->headTitle()->renderTitle();
+$url = $this->serverUrl(true);
+?>
+
 <ul id='sharing-buttons'>
     <?php if(in_array('fb', $enabledMethods)) :?>
     <li id='sharing-fb' class='sharing-button'>
@@ -27,7 +32,10 @@
     <?php endif; ?>
     <?php if(in_array('email', $enabledMethods)) :?>
     <li id='sharing-email' class='sharing-button'>
-        <a><?php echo $translator->translate('Email'); ?></a>
+        <a 
+            href="mailto:?subject='<?php echo $pageTitle; ?>'&body='<?php echo $url; ?>'">
+        <?php echo $translator->translate('Email'); ?>
+        </a>
     </li>
     <?php endif; ?>
 </ul>
