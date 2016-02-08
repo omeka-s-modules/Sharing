@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<?php
+$css = "
+div.content {margin-right: 10px; max-width:310px;}
+div.thumbnail {float:right;}
+h1 {margin: 0;}
+
+
+";
+?>
+<html>
+<head>
+
+
+</head>
+<body>
+    <div style="width: 450px">
+        <h1><?php echo $item->displayTitle(); ?></h1>
+        <p>
+        <?php echo $item->displayDescription();?>
+        </p>
+        <?php 
+            if ($primaryMedia = $item->primaryMedia()) {
+                $image = $escape($primaryMedia->thumbnailUrl('square'));
+                echo "<img src='$image'>/</img>";
+            }
+        ?>
+    </div>
+
+</body>
