@@ -10,9 +10,9 @@ class IndexController extends AbstractActionController
     public function embedAction()
     {
         $data = $this->params()->fromPost();
-        $itemId = $data['item_id'];
+        //$itemId = $data['item_id'];
         $itemId = 3952; //@todo make this real. just testing
-        $response = $this->api()->find('item', $itemId);
+        $response = $this->api()->read('items', $itemId);
         $item = $response->getContent();
         
         $view = new ViewModel;
