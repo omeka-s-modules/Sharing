@@ -85,6 +85,11 @@ class Module extends AbstractModule
                                     'value' => 'email',
                                     'selected' => in_array('email', $enabledMethods),
                                    ],
+                    'embed'     => [
+                                    'label' => $translator->translate('Embed codes'),
+                                    'value' => 'embed',
+                                    'selected' => in_array('embed', $enabledMethods),
+                                   ],
                 ],
             ],
         ]);
@@ -100,7 +105,6 @@ class Module extends AbstractModule
     public function insertOpenGraphData($event)
     {
         $siteSettings = $this->getServiceLocator()->get('Omeka\SiteSettings');
-        if ($siteSettings->get('sharing_enable')) {
             $routeMatch = $this->getServiceLocator()->get('Application')
                             ->getMvcEvent()->getRouteMatch();
             $controller = $routeMatch->getParam('controller');
@@ -146,7 +150,6 @@ class Module extends AbstractModule
             if ($image) {
                 $view->headMeta()->appendProperty('og:image', $image);
             }
-        }
     }
     
     public function viewShowAfter($event)
