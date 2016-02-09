@@ -13,6 +13,13 @@ class Module extends AbstractModule
         return include __DIR__ . '/config/module.config.php';
     }
     
+    public function onBootstrap(MvcEvent $event)
+    {
+        parent::onBootstrap($event);
+        $acl = $this->getServiceLocator()->get('Omeka\Acl');
+        $acl->allow(null, 'Sharing\Controller\Index');
+    }
+    
     public function attachListeners(SharedEventManagerInterface $sharedEventManager)
     {
         $sharedEventManager->attach(
