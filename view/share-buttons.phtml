@@ -38,5 +38,21 @@ $url = $this->serverUrl(true);
         </a>
     </li>
     <?php endif; ?>
+    <?php if(in_array('embed', $enabledMethods) && $itemId): ?>
+
+    <?php
+     $embedUrl = $this->url('embed',
+                             array('controller' => 'index',  'action' => 'embed', 'item-id' => $itemId),
+                             array('force_canonical' => true)
+             );
+    ?>
+    <li id='sharing-embed' class='sharing-button'>
+        <a data-embed-url="<?php echo $embedUrl; ?>">
+        <?php echo $translator->translate('Get embed code'); ?>
+        </a>
+    </li>
+    <?php endif;?>
 </ul>
+
+
 

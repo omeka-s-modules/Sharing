@@ -14,7 +14,7 @@ li#sharing-pinterest span {
     vertical-align: unset !important;
 }
 
-li#sharing-email {
+li#sharing-email, li#sharing-embed {
     font-size: 13px;
     vertical-align: top;
     line-height: 1em;

@@ -120,6 +120,7 @@ class Module extends AbstractModule
                     if ($primaryMedia = $view->item->primaryMedia()) {
                         $image = $escape($primaryMedia->thumbnailUrl('square'));
                         $view->headMeta()->appendProperty('og:image', $image);
+                        
                     }
                 break;
                     
@@ -161,13 +162,16 @@ class Module extends AbstractModule
             
             $view = $event->getTarget();
             $view->headScript()->appendFile('https://platform.twitter.com/widgets.js');
+            $view->headScript()->appendFile($view->assetUrl('js/sharing.js', 'Sharing'));
             $view->headLink()->appendStylesheet($view->assetUrl('css/sharing.css', 'Sharing'));
             $escape = $view->plugin('escapeHtml');
             $translator = $this->getServiceLocator()->get('MvcTranslator');
             echo $view->partial('share-buttons',
                     array('escape' => $escape,
                           'translator' => $translator,
-                          'enabledMethods' => $enabledMethods)
+                          'enabledMethods' => $enabledMethods,
+                          'itemId' => isset($view->item) ? $view->item->id() : false
+                            )
                     );
             
             $fbJavascript = "

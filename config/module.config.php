@@ -8,9 +8,9 @@ return array(
     'router' => array(
         'routes' => array(
                 'embed' => array(
-                    'type' => 'Literal',
+                    'type' => 'Segment',
                     'options' => array(
-                        'route'    => '/embed',
+                        'route'    => '/embed/:item-id',
                         'defaults' => array(
                             '__NAMESPACE__' => 'Sharing\Controller',
                             'controller'    => 'Index',
