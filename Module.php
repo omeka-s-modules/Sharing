@@ -134,10 +134,16 @@ class Module extends AbstractModule
                     // need to figure out how to handle the different block types and finding an image
 
                     $block = $view->page->blocks()[0];
-                    $attachment = $block->attachments()[0];
-                    $item = $attachment->item();
-                    if ($primaryMedia = $item->primaryMedia()) {
-                        $image = $escape($primaryMedia->thumbnailUrl('square'));
+                    $blocks = $view->page->blocks();
+                    foreach ($blocks as $block) {
+                        $attachments = $block->attachments();
+                        foreach($attachments as $attachment) {
+                            $item = $attachment->item();
+                            if ($primaryMedia = $item->primaryMedia()) {
+                                $image = $escape($primaryMedia->thumbnailUrl('square'));
+                                break 2;
+                            }
+                        }
                     }
                 break;
             }
