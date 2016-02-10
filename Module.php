@@ -118,7 +118,7 @@ class Module extends AbstractModule
                     $description = $escape($view->item->displayDescription());
                     $view->headMeta()->appendProperty('og:description', $description);
                     if ($primaryMedia = $view->item->primaryMedia()) {
-                        $image = $escape($primaryMedia->thumbnailUrl('square'));
+                        $image = $escape($primaryMedia->thumbnailUrl('large'));
                         $view->headMeta()->appendProperty('og:image', $image);
                         
                     }
@@ -140,7 +140,7 @@ class Module extends AbstractModule
                         foreach($attachments as $attachment) {
                             $item = $attachment->item();
                             if ($primaryMedia = $item->primaryMedia()) {
-                                $image = $escape($primaryMedia->thumbnailUrl('square'));
+                                $image = $escape($primaryMedia->thumbnailUrl('large'));
                                 break 2;
                             }
                         }
