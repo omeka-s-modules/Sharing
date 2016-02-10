@@ -133,7 +133,6 @@ class Module extends AbstractModule
                 case 'Omeka\Controller\Site\Page':
                     // need to figure out how to handle the different block types and finding an image
 
-                    $block = $view->page->blocks()[0];
                     $blocks = $view->page->blocks();
                     foreach ($blocks as $block) {
                         $attachments = $block->attachments();
