@@ -167,11 +167,15 @@ class Module extends AbstractModule
             $view->headLink()->appendStylesheet($view->assetUrl('css/sharing.css', 'Sharing'));
             $escape = $view->plugin('escapeHtml');
             $translator = $this->getServiceLocator()->get('MvcTranslator');
+            $siteSlug = $this->getServiceLocator()->get('Application')
+                ->getMvcEvent()->getRouteMatch()->getParam('site-slug');
+             
             echo $view->partial('share-buttons',
                     array('escape' => $escape,
                           'translator' => $translator,
                           'enabledMethods' => $enabledMethods,
-                          'itemId' => isset($view->item) ? $view->item->id() : false
+                          'itemId' => isset($view->item) ? $view->item->id() : false,
+                          'siteSlug' => $siteSlug,
                             )
                     );
             

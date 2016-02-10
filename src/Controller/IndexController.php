@@ -9,14 +9,15 @@ class IndexController extends AbstractActionController
 {
     public function embedAction()
     {
-        $data = $this->params('item-id');
         $itemId = $this->params('item-id');
-        //$itemId = 3952; //@todo make this real. just testing
+        $siteSlug = $this->params('site-slug');
         $response = $this->api()->read('items', $itemId);
         $item = $response->getContent();
         
         $view = new ViewModel;
+        $view->setTerminal(true);
         $view->setVariable('item', $item);
+        $view->setVariable('siteSlug', $siteSlug);
         return $view;
     }
 }

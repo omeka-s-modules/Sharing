@@ -43,9 +43,16 @@ $url = $this->serverUrl(true);
 
     <?php
      $embedUrl = $this->url('embed',
-                             array('controller' => 'index',  'action' => 'embed', 'item-id' => $itemId),
+                             array('controller' => 'index',
+                                   'action'     => 'embed',
+                                   'item-id'    => $itemId,
+                                   'site-slug'  => $siteSlug,
+                                   ),
                              array('force_canonical' => true)
              );
+     
+
+     
     ?>
     <li id='sharing-embed' class='sharing-button'>
         <a data-embed-url="<?php echo $embedUrl; ?>">
@@ -54,6 +61,3 @@ $url = $this->serverUrl(true);
     </li>
     <?php endif;?>
 </ul>
-
-
-

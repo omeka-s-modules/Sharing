@@ -10,7 +10,7 @@ return array(
                 'embed' => array(
                     'type' => 'Segment',
                     'options' => array(
-                        'route'    => '/embed/:item-id',
+                        'route'    => '/embed/:site-slug/:item-id',
                         'defaults' => array(
                             '__NAMESPACE__' => 'Sharing\Controller',
                             'controller'    => 'Index',
