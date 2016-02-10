@@ -123,13 +123,7 @@ class Module extends AbstractModule
                         
                     }
                 break;
-                    
-                //does this ever go on the public side?
-                case 'Omeka\Controller\Site\Index':
-//                    $description = '';
-//                    $image = '';
-                break;
-                    
+
                 case 'Omeka\Controller\Site\Page':
                     // need to figure out how to handle the different block types and finding an image
 
