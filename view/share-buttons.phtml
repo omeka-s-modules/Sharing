@@ -1,5 +1,6 @@
 <?php
-$pageTitle = $this->headTitle()->renderTitle();
+$this->headTitle()->setSeparator(' · ');
+$pageTitle = $this->headTitle()->renderTitle() . ' · ' . $this->setting('installation_title', 'Omeka S');
 $url = $this->serverUrl(true);
 ?>
 
@@ -33,7 +34,7 @@ $url = $this->serverUrl(true);
     <?php if(in_array('email', $enabledMethods)) :?>
     <li id='sharing-email' class='sharing-button'>
         <a 
-            href="mailto:?subject='<?php echo $pageTitle; ?>'&body='<?php echo $url; ?>'">
+            href="mailto:?subject=<?php echo $escape($pageTitle); ?>&body=<?php echo $url; ?>">
         <?php echo $translator->translate('Email'); ?>
         </a>
     </li>
