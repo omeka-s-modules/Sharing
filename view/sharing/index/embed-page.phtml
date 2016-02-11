@@ -37,7 +37,7 @@ margin-top: 0px;
                 $item = $attachment->item();
                 if ($primaryMedia = $item->primaryMedia()) {
                     $image = $escape($primaryMedia->thumbnailUrl('square'));
-                    echo "<img style='float:left' src='$image'></img>";
+                    echo "<img src='$image'></img>";
                     break 2;
                 }
             }
