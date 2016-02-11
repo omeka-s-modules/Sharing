@@ -12,14 +12,14 @@ class Module extends AbstractModule
     {
         return include __DIR__ . '/config/module.config.php';
     }
-    
+
     public function onBootstrap(MvcEvent $event)
     {
         parent::onBootstrap($event);
         $acl = $this->getServiceLocator()->get('Omeka\Acl');
         $acl->allow(null, 'Sharing\Controller\Index');
     }
-    
+
     public function attachListeners(SharedEventManagerInterface $sharedEventManager)
     {
         $sharedEventManager->attach(
@@ -27,7 +27,7 @@ class Module extends AbstractModule
             'site_settings.form',
             [$this, 'addSiteEnableCheckbox']
         );
-            
+
         $sharedEventManager->attach(
                 array('Omeka\Controller\Site\Item',
                       'Omeka\Controller\Site\Index',
@@ -36,7 +36,7 @@ class Module extends AbstractModule
                 'view.show.after',
                 array($this, 'viewShowAfter')
                 );
-        
+
         $sharedEventManager->attach(
                 array('Omeka\Controller\Site\Item',
                       'Omeka\Controller\Site\Index',
@@ -46,13 +46,12 @@ class Module extends AbstractModule
                 array($this, 'insertOpenGraphData')
                 );
     }
-    
+
     public function addSiteEnableCheckbox($event)
     {
         $siteSettings = $this->getServiceLocator()->get('Omeka\SiteSettings');
         $form = $event->getParam('form');
         $translator = $form->getTranslator();
-        
         $enabledMethods = $siteSettings->get('sharing_methods', array());
         $form->add([
             'name'     => 'sharing_methods',
@@ -101,14 +100,13 @@ class Module extends AbstractModule
         ]);
 
     }
-    
+
     public function insertOpenGraphData($event)
     {
         $siteSettings = $this->getServiceLocator()->get('Omeka\SiteSettings');
             $routeMatch = $this->getServiceLocator()->get('Application')
                             ->getMvcEvent()->getRouteMatch();
             $controller = $routeMatch->getParam('controller');
-            
             $view = $event->getTarget();
             $escape = $view->plugin('escapeHtml');
             $description = false;
@@ -120,13 +118,10 @@ class Module extends AbstractModule
                     if ($primaryMedia = $view->item->primaryMedia()) {
                         $image = $escape($primaryMedia->thumbnailUrl('large'));
                         $view->headMeta()->appendProperty('og:image', $image);
-                        
                     }
                 break;
 
                 case 'Omeka\Controller\Site\Page':
-                    // need to figure out how to handle the different block types and finding an image
-
                     $blocks = $view->page->blocks();
                     foreach ($blocks as $block) {
                         $attachments = $block->attachments();
@@ -148,19 +143,17 @@ class Module extends AbstractModule
             if ($description) {
                 $view->headMeta()->appendProperty('og:description', $description);
             }
-            
+
             if ($image) {
                 $view->headMeta()->appendProperty('og:image', $image);
             }
     }
-    
+
     public function viewShowAfter($event)
     {
-        
         $siteSettings = $this->getServiceLocator()->get('Omeka\SiteSettings');
         $enabledMethods = $siteSettings->get('sharing_methods');
         if (! empty($enabledMethods)) {
-            
             $view = $event->getTarget();
             $view->headScript()->appendFile('https://platform.twitter.com/widgets.js');
             $view->headScript()->appendFile($view->assetUrl('js/sharing.js', 'Sharing'));
@@ -169,7 +162,7 @@ class Module extends AbstractModule
             $translator = $this->getServiceLocator()->get('MvcTranslator');
             $siteSlug = $this->getServiceLocator()->get('Application')
                 ->getMvcEvent()->getRouteMatch()->getParam('site-slug');
-             
+
             echo $view->partial('share-buttons',
                     array('escape' => $escape,
                           'translator' => $translator,
@@ -179,7 +172,7 @@ class Module extends AbstractModule
                           'siteSlug' => $siteSlug,
                             )
                     );
-            
+
             $fbJavascript = "
             <script>
               window.fbAsyncInit = function() {
@@ -188,7 +181,7 @@ class Module extends AbstractModule
                   version    : 'v2.5'
                 });
               };
-            
+
               (function(d, s, id){
                  var js, fjs = d.getElementsByTagName(s)[0];
                  if (d.getElementById(id)) {return;}
@@ -198,21 +191,19 @@ class Module extends AbstractModule
                }(document, 'script', 'facebook-jssdk'));
             </script>
             ";
-            
+
             $pinterestJavascript = '
-            
                 <script
                     type="text/javascript"
                     async defer
                     src="//assets.pinterest.com/js/pinit.js"
                 ></script>
-            
             ';
-            
+
             $tumblrJavascript = '
                 <script id="tumblr-js" async src="https://assets.tumblr.com/share-button.js"></script>
             ';
-            
+
             foreach($enabledMethods as $method) {
                 $js = $method . 'Javascript';
                 if (isset($$js)) {
