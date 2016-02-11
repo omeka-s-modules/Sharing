@@ -7,14 +7,25 @@ return array(
     ),
     'router' => array(
         'routes' => array(
-                'embed' => array(
+                'embed-item' => array(
                     'type' => 'Segment',
                     'options' => array(
-                        'route'    => '/embed/:site-slug/:item-id',
+                        'route'    => '/embed-item/:site-slug/:item-id',
                         'defaults' => array(
                             '__NAMESPACE__' => 'Sharing\Controller',
                             'controller'    => 'Index',
-                            'action'        => 'embed',
+                            'action'        => 'embedItem',
+                        ),
+                    ),
+                ),
+                'embed-page' => array(
+                    'type' => 'Segment',
+                    'options' => array(
+                        'route'    => '/embed-page/:page-id',
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Sharing\Controller',
+                            'controller'    => 'Index',
+                            'action'        => 'embedPage',
                         ),
                     ),
                 )

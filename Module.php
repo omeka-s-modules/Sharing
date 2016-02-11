@@ -175,6 +175,7 @@ class Module extends AbstractModule
                           'translator' => $translator,
                           'enabledMethods' => $enabledMethods,
                           'itemId' => isset($view->item) ? $view->item->id() : false,
+                          'pageId' => isset($view->page) ? $view->page->id() : false,
                           'siteSlug' => $siteSlug,
                             )
                     );

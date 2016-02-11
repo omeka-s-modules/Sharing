@@ -39,20 +39,31 @@ $url = $this->serverUrl(true);
         </a>
     </li>
     <?php endif; ?>
-    <?php if(in_array('embed', $enabledMethods) && $itemId): ?>
+    <?php if(in_array('embed', $enabledMethods) ): ?>
 
     <?php
-     $embedUrl = $this->url('embed',
+    if ($itemId) {
+        $embedUrl = $this->url('embed-item',
                              array('controller' => 'index',
-                                   'action'     => 'embed',
+                                   'action'     => 'embed-item',
                                    'item-id'    => $itemId,
                                    'site-slug'  => $siteSlug,
                                    ),
                              array('force_canonical' => true)
-             );
+         );
      
-
+    }
+    
+    if ($pageId) {
+        $embedUrl = $this->url('embed-page',
+                             array('controller' => 'index',
+                                   'action'     => 'embed-page',
+                                   'page-id'    => $pageId,
+                                   ),
+                             array('force_canonical' => true)
+         );
      
+    }
     ?>
     <li id='sharing-embed' class='sharing-button'>
         <a data-embed-url="<?php echo $embedUrl; ?>">
