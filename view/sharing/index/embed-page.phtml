@@ -25,10 +25,25 @@ margin-top: 0px;
     <div style="width: 450px">
 
         <div id='text'>
-something
+<h1><a href='<?php echo $this->page->siteUrl(); ?>'><?php echo $this->page->title(); ?></a></h1>
         </div>
 
-some image
+        <?php
+        
+        $blocks = $this->page->blocks();
+        foreach ($blocks as $block) {
+            $attachments = $block->attachments();
+            foreach($attachments as $attachment) {
+                $item = $attachment->item();
+                if ($primaryMedia = $item->primaryMedia()) {
+                    $image = $escape($primaryMedia->thumbnailUrl('square'));
+                    echo "<img style='float:left' src='$image'></img>";
+                    break 2;
+                }
+            }
+        }
+        
+        ?>
     </div>
 
 </body>
