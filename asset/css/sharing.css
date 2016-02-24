@@ -14,9 +14,49 @@ li#sharing-pinterest span {
     vertical-align: unset !important;
 }
 
-li#sharing-email, li#sharing-embed {
-    font-size: 13px;
+li#sharing-email a, li#sharing-embed a {
+    font-size: 11px;
     vertical-align: top;
-    line-height: 1em;
     cursor: pointer;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 5px;
+    margin: 2px 0 0 -2px;
+    display: inline-block;
+}
+
+li#sharing-email a {
+    background-color: #555;
+    border-radius: 3px;
+    color: #fff;
+}
+
+li#sharing-email a:hover {
+    border: 0;
+    background-color: #3f3f3f;
+}
+
+li#sharing-email a:before {
+    content: "\f0e0";
+    font-family: "FontAwesome";
+    font-weight: normal;
+}
+
+li#sharing-embed a {
+    background-color: #fff;
+    border: 1px solid #c2c2c2;
+    border-radius: 3px;
+    line-height: 18px;
+    color: #666;
+}
+
+li#sharing-embed a:hover {
+    background-color: #eee;
+    color: #666;
+}
+
+li#sharing-embed a:before {
+    content: "\f121";
+    font-family: "FontAwesome";
+    font-weight: normal;
 }
