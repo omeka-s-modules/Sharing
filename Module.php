@@ -51,41 +51,40 @@ class Module extends AbstractModule
     {
         $siteSettings = $this->getServiceLocator()->get('Omeka\SiteSettings');
         $form = $event->getParam('form');
-        $translator = $form->getTranslator();
         $enabledMethods = $siteSettings->get('sharing_methods', array());
         $form->add([
             'name'     => 'sharing_methods',
             'type'     => 'multi_checkbox',
             'options'  => [
-                'label' => $translator->translate('Enable Sharing module for these methods'),
+                'label' => 'Enable Sharing module for these methods', // @translate
                 'value_options' => [
                     'fb'        => [
-                                    'label' => $translator->translate('Facebook'),
+                                    'label' => 'Facebook', // @translate
                                     'value' => 'fb',
                                     'selected' => in_array('fb', $enabledMethods),
                                     ],
                     'twitter'   => [
-                                    'label' => $translator->translate('Twitter'),
+                                    'label' => 'Twitter', // @translate
                                     'value' => 'twitter',
                                     'selected' => in_array('twitter', $enabledMethods),
                                    ],
                     'tumblr'    => [
-                                    'label' => $translator->translate('Tumblr'),
+                                    'label' => 'Tumblr', // @translate
                                     'value' => 'tumblr',
                                     'selected' => in_array('tumblr', $enabledMethods),
                                    ],
                     'pinterest' => [
-                                    'label' => $translator->translate('Pinterest'),
+                                    'label' => 'Pinterest', // @translate
                                     'value' => 'pinterest',
                                     'selected' => in_array('pinterest', $enabledMethods),
                                    ],
                     'email'     => [
-                                    'label' => $translator->translate('Email'),
+                                    'label' => 'Email', // @translate
                                     'value' => 'email',
                                     'selected' => in_array('email', $enabledMethods),
                                    ],
                     'embed'     => [
-                                    'label' => $translator->translate('Embed codes'),
+                                    'label' => 'Embed codes', // @translate
                                     'value' => 'embed',
                                     'selected' => in_array('embed', $enabledMethods),
                                    ],
