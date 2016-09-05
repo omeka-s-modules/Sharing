@@ -29,19 +29,37 @@ class Module extends AbstractModule
         );
 
         $sharedEventManager->attach(
-                array('Omeka\Controller\Site\Item',
-                      'Omeka\Controller\Site\Index',
-                      'Omeka\Controller\Site\Page'
-                      ),
+                'Omeka\Controller\Site\Item',
+                'view.show.after',
+                array($this, 'viewShowAfter')
+                );
+        
+        $sharedEventManager->attach(
+                'Omeka\Controller\Site\Index',
+                'view.show.after',
+                array($this, 'viewShowAfter')
+                );
+        
+        $sharedEventManager->attach(
+                'Omeka\Controller\Site\Page',
                 'view.show.after',
                 array($this, 'viewShowAfter')
                 );
 
         $sharedEventManager->attach(
-                array('Omeka\Controller\Site\Item',
-                      'Omeka\Controller\Site\Index',
-                      'Omeka\Controller\Site\Page'
-                      ),
+                'Omeka\Controller\Site\Item',
+                'view.show.after',
+                array($this, 'insertOpenGraphData')
+                );
+        
+        $sharedEventManager->attach(
+                'Omeka\Controller\Site\Index',
+                'view.show.after',
+                array($this, 'insertOpenGraphData')
+                );
+        
+        $sharedEventManager->attach(
+               'Omeka\Controller\Site\Page',
                 'view.show.after',
                 array($this, 'insertOpenGraphData')
                 );
