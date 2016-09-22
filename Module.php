@@ -117,7 +117,7 @@ class Module extends AbstractModule
             ];
 
         $sharingMultiCheckbox->setOptions($options);
-        $sharingMultiCheckbox->setAttribute('required', true);
+        $sharingMultiCheckbox->setIsRequired(false);
         
         $fieldset->add($sharingMultiCheckbox);
         $form->add($fieldset);
