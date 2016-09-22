@@ -73,6 +73,11 @@ class Module extends AbstractModule
     {
         $siteSettings = $this->getServiceLocator()->get('Omeka\SiteSettings');
         $form = $event->getParam('form');
+        
+        $fieldset = new Fieldset('sharing');
+        $fieldset->setLabel('Sharing');
+        
+        
         $enabledMethods = $siteSettings->get('sharing_methods', array());
         $sharingMultiCheckbox = new SharingMultiCheckbox('sharing_methods');
         $options =  [
@@ -113,7 +118,9 @@ class Module extends AbstractModule
 
         $sharingMultiCheckbox->setOptions($options);
         $sharingMultiCheckbox->setAttribute('required', false);
-        $form->add($sharingMultiCheckbox);
+        
+        $fieldset->add($sharingMultiCheckbox);
+        $form->add($fieldset);
     }
 
     public function insertOpenGraphData($event)
