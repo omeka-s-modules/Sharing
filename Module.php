@@ -248,10 +248,10 @@ class Module extends AbstractModule
                    ];
         $attributes = [
                         'value'    => $settings->get('sharing_test', ''),
-                        'required' => false,
                       ];
         $testText->setOptions($options);
         $testText->setAttributes($attributes);
+        $testText->setIsRequired(true);
         $fieldset->add($testText);
         
 
