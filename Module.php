@@ -1,6 +1,7 @@
 <?php
 namespace Sharing;
 
+use Sharing\Form\Element\SharingMultiCheckbox;
 use Omeka\Module\AbstractModule;
 use Zend\Form\Fieldset;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -73,10 +74,8 @@ class Module extends AbstractModule
         $siteSettings = $this->getServiceLocator()->get('Omeka\SiteSettings');
         $form = $event->getParam('form');
         $enabledMethods = $siteSettings->get('sharing_methods', array());
-        $form->add([
-            'name'     => 'sharing_methods',
-            'type'     => 'multiCheckbox',
-            'options'  => [
+        $sharingMultiCheckbox = new SharingMultiCheckbox('sharing_methods');
+        $options =  [
                 'label' => 'Enable Sharing module for these methods', // @translate
                 'value_options' => [
                     'fb'        => [
@@ -110,18 +109,11 @@ class Module extends AbstractModule
                                     'selected' => in_array('embed', $enabledMethods),
                                    ],
                 ],
-            ],
-            'attributes' => [
-                'required' => false,
-            ],
-        ]);
-// /*
-        $inputFilter = $form->getInputFilter();
-        $inputFilter->add([
-            'name'     => 'sharing_methods',
-            'required' => false,
-        ]);
-// */
+            ];
+
+        $sharingMultiCheckbox->setOptions($options);
+        $sharingMultiCheckbox->setAttribute('required', false);
+        $form->add($sharingMultiCheckbox);
     }
 
     public function insertOpenGraphData($event)
