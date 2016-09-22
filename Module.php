@@ -2,6 +2,7 @@
 namespace Sharing;
 
 use Sharing\Form\Element\SharingMultiCheckbox;
+use Sharing\Form\Element\TestText;
 use Omeka\Module\AbstractModule;
 use Zend\Form\Fieldset;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -27,9 +28,8 @@ class Module extends AbstractModule
         $sharedEventManager->attach(
             'Omeka\Controller\Admin\SettingController',
             'global_settings.form',
-           // [$this, 'globalFieldset'] // fail!
-            [$this, 'globalForm'] // works!
-           // [$this, 'globalFormNoInputFilter'] // fail!
+            [$this, 'globalFieldset'] // fail!
+           // [$this, 'globalForm'] // fail!
         );
         
         $sharedEventManager->attach(
@@ -117,7 +117,7 @@ class Module extends AbstractModule
             ];
 
         $sharingMultiCheckbox->setOptions($options);
-        $sharingMultiCheckbox->setAttribute('required', false);
+        $sharingMultiCheckbox->setAttribute('required', true);
         
         $fieldset->add($sharingMultiCheckbox);
         $form->add($fieldset);
@@ -242,24 +242,19 @@ class Module extends AbstractModule
         $fieldset = new Fieldset('sharing');
         $fieldset->setLabel('Sharing');
         
-        $fieldset->add([
-            'type' => 'textarea',
-            'name' => 'sharing_test',
-            'options' => [
-                'label' => 'Just testing',
-            ],
-            'attributes' => [
-                'value'    => $settings->get('sharing_test', ''),
-                'required' => false,
-            ],
-        ]);
- /*
-        $inputFilter = $form->getInputFilter();
-        $inputFilter->add([
-            'name'     => 'sharing_test',
-            'required' => false,
-        ]);
-// */        
+        $testText = new TestText('sharing_test');
+        $options = [
+                    'label' => 'Just testing',
+                   ];
+        $attributes = [
+                        'value'    => $settings->get('sharing_test', ''),
+                        'required' => false,
+                      ];
+        $testText->setOptions($options);
+        $testText->setAttributes($attributes);
+        $fieldset->add($testText);
+        
+
         $form->add($fieldset);
     }
     
@@ -267,52 +262,18 @@ class Module extends AbstractModule
     {
         $settings = $this->getServiceLocator()->get('Omeka\Settings');
         $form = $event->getParam('form');
-        $fieldset = new Fieldset('sharing');
-        $fieldset->setLabel('Sharing');
         
-        $form->add([
-            'type' => 'textarea',
-            'name' => 'sharing_test',
-            'options' => [
-                'label' => 'Just testing',
-            ],
-            'attributes' => [
-                'value'    => $settings->get('sharing_test', ''),
-                'required' => false,
-            ],
-        ]);
-
-        $inputFilter = $form->getInputFilter();
-        $inputFilter->add([
-            'name'     => 'sharing_test',
-            'required' => false,
-        ]);
-    }
-    
-    public function globalFormNoInputFilter($event)
-    {
-        $settings = $this->getServiceLocator()->get('Omeka\Settings');
-        $form = $event->getParam('form');
-        $fieldset = new Fieldset('sharing');
-        $fieldset->setLabel('Sharing');
+        $testText = new TestText('sharing_test');
+        $options = [
+                    'label' => 'Just testing',
+                   ];
+        $attributes = [
+                        'value'    => $settings->get('sharing_test', ''),
+                        'required' => false,
+                      ];
+        $testText->setOptions($options);
+        $testText->setAttributes($attributes);
+        $form->add($testText);
         
-        $form->add([
-            'type' => 'textarea',
-            'name' => 'sharing_test',
-            'options' => [
-                'label' => 'Just testing',
-            ],
-            'attributes' => [
-                'value'    => $settings->get('sharing_test', ''),
-                'required' => false,
-            ],
-        ]);
-/*
-        $inputFilter = $form->getInputFilter();
-        $inputFilter->add([
-            'name'     => 'sharing_test',
-            'required' => false,
-        ]);
-        */
     }
 }
