@@ -4,6 +4,7 @@ namespace Sharing;
 use Sharing\Form\Element\SharingMultiCheckbox;
 use Sharing\Form\Element\TestText;
 use Omeka\Module\AbstractModule;
+use Omeka\Event\Event;
 use Zend\Form\Fieldset;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\EventManager\SharedEventManagerInterface;
@@ -25,17 +26,17 @@ class Module extends AbstractModule
 
     public function attachListeners(SharedEventManagerInterface $sharedEventManager)
     {
+
         $sharedEventManager->attach(
-            'Omeka\Controller\Admin\SettingController',
-            'global_settings.form',
-            [$this, 'globalFieldset'] // fail!
-           // [$this, 'globalForm'] // fail!
+            'Omeka\Form\SiteSettingsForm',
+            Event::SITE_SETTINGS_ADD_ELEMENTS,
+            [$this, 'addSiteEnableCheckbox']
         );
         
         $sharedEventManager->attach(
-            'Omeka\Controller\SiteAdmin\IndexController',
-            'site_settings.form',
-            [$this, 'addSiteEnableCheckbox']
+            'Omeka\Form\SiteSettingsForm',
+            Event::SITE_SETTINGS_ADD_INPUT_FILTERS,
+            [$this, 'addSiteSettingsFilters']
         );
 
         $sharedEventManager->attach(
@@ -68,6 +69,17 @@ class Module extends AbstractModule
                 array($this, 'insertOpenGraphData')
                 );
     }
+    
+    public function addSiteSettingsFilters($event)
+    {
+        $inputFilter = $event->getParam('inputFilter');
+        
+        $inputFilter->add([
+            'name'     => 'sharing_methods',
+            'required' => false,
+        ]);
+
+    }
 
     public function addSiteEnableCheckbox($event)
     {
@@ -79,8 +91,10 @@ class Module extends AbstractModule
         
         
         $enabledMethods = $siteSettings->get('sharing_methods', array());
-        $sharingMultiCheckbox = new SharingMultiCheckbox('sharing_methods');
-        $options =  [
+        $fieldset->add([
+            'name'     => 'sharing_methods',
+            'type'     => 'multiCheckbox',
+            'options'  => [
                 'label' => 'Enable Sharing module for these methods', // @translate
                 'value_options' => [
                     'fb'        => [
@@ -114,12 +128,11 @@ class Module extends AbstractModule
                                     'selected' => in_array('embed', $enabledMethods),
                                    ],
                 ],
-            ];
-
-        $sharingMultiCheckbox->setOptions($options);
-        $sharingMultiCheckbox->setIsRequired(false);
-        
-        $fieldset->add($sharingMultiCheckbox);
+            ],
+            'attributes' => [
+                'required' => false,
+            ],
+        ]);
         $form->add($fieldset);
     }
 
@@ -233,47 +246,5 @@ class Module extends AbstractModule
                 }
             }
         }
-    }
-    
-    public function globalFieldset($event)
-    {
-        $settings = $this->getServiceLocator()->get('Omeka\Settings');
-        $form = $event->getParam('form');
-        $fieldset = new Fieldset('sharing');
-        $fieldset->setLabel('Sharing');
-        
-        $testText = new TestText('sharing_test');
-        $options = [
-                    'label' => 'Just testing',
-                   ];
-        $attributes = [
-                        'value'    => $settings->get('sharing_test', ''),
-                      ];
-        $testText->setOptions($options);
-        $testText->setAttributes($attributes);
-        $testText->setIsRequired(false);
-        $fieldset->add($testText);
-
-
-        $form->add($fieldset);
-    }
-    
-    public function globalForm($event)
-    {
-        $settings = $this->getServiceLocator()->get('Omeka\Settings');
-        $form = $event->getParam('form');
-        
-        $testText = new TestText('sharing_test');
-        $options = [
-                    'label' => 'Just testing',
-                   ];
-        $attributes = [
-                        'value'    => $settings->get('sharing_test', ''),
-                      ];
-        $testText->setOptions($options);
-        $testText->setAttributes($attributes);
-        $testText->setIsRequired(false);
-        $form->add($testText);
-        
     }
 }
