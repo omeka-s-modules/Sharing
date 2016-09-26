@@ -32,7 +32,7 @@ class Module extends AbstractModule
             Event::SITE_SETTINGS_ADD_ELEMENTS,
             [$this, 'addSiteEnableCheckbox']
         );
-        
+
         $sharedEventManager->attach(
             'Omeka\Form\SiteSettingsForm',
             Event::SITE_SETTINGS_ADD_INPUT_FILTERS,
@@ -69,13 +69,12 @@ class Module extends AbstractModule
                 array($this, 'insertOpenGraphData')
                 );
     }
-    
+
     public function addSiteSettingsFilters($event)
     {
         $inputFilter = $event->getParam('inputFilter');
-        
         $inputFilter->add([
-            'name'     => 'sharing_methods',
+            'name'     => 'sharing',
             'required' => false,
         ]);
 
