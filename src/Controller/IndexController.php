@@ -14,10 +14,11 @@ class IndexController extends AbstractActionController
         $response = $this->api()->read('items', $itemId);
         $item = $response->getContent();
 
-        $view = new ViewModel;
+        $view = new ViewModel();
         $view->setTerminal(true);
         $view->setVariable('item', $item);
         $view->setVariable('siteSlug', $siteSlug);
+
         return $view;
     }
 
@@ -28,10 +29,11 @@ class IndexController extends AbstractActionController
         $response = $this->api()->read('site_pages', $pageId);
         $page = $response->getContent();
 
-        $view = new ViewModel;
+        $view = new ViewModel();
         $view->setTerminal(true);
         $view->setVariable('page', $page);
         $view->setVariable('siteSlug', $siteSlug);
+
         return $view;
     }
 }

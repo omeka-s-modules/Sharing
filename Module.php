@@ -1,12 +1,10 @@
 <?php
+
 namespace Sharing;
 
-use Sharing\Form\Element\SharingMultiCheckbox;
-use Sharing\Form\Element\TestText;
 use Omeka\Module\AbstractModule;
 use Omeka\Event\Event;
 use Zend\Form\Fieldset;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\EventManager\SharedEventManagerInterface;
 use Zend\Mvc\MvcEvent;
 
@@ -14,7 +12,7 @@ class Module extends AbstractModule
 {
     public function getConfig()
     {
-        return include __DIR__ . '/config/module.config.php';
+        return include __DIR__.'/config/module.config.php';
     }
 
     public function onBootstrap(MvcEvent $event)
@@ -26,7 +24,6 @@ class Module extends AbstractModule
 
     public function attachListeners(SharedEventManagerInterface $sharedEventManager)
     {
-
         $sharedEventManager->attach(
             'Omeka\Form\SiteSettingsForm',
             Event::SITE_SETTINGS_ADD_ELEMENTS,
@@ -44,7 +41,7 @@ class Module extends AbstractModule
                 'view.show.before',
                 array($this, 'viewShowAfter')
                 );
-        
+
         $sharedEventManager->attach(
                 'Omeka\Controller\Site\Page',
                 'view.show.after',
@@ -56,13 +53,13 @@ class Module extends AbstractModule
                 'view.show.after',
                 array($this, 'insertOpenGraphData')
                 );
-        
+
         $sharedEventManager->attach(
                 'Omeka\Controller\Site\Index',
                 'view.show.after',
                 array($this, 'insertOpenGraphData')
                 );
-        
+
         $sharedEventManager->attach(
                'Omeka\Controller\Site\Page',
                 'view.show.after',
@@ -73,40 +70,38 @@ class Module extends AbstractModule
     public function addSiteSettingsFilters($event)
     {
         $inputFilter = $event->getParam('inputFilter');
-        $inputFilter->add([
-            'name'     => 'sharing',
-            'required' => false,
-        ]);
-
+        $inputFilter->get('sharing')->add([
+                    'name' => 'sharing_methods',
+                    'required' => false,
+                ]);
     }
 
     public function addSiteEnableCheckbox($event)
     {
         $siteSettings = $this->getServiceLocator()->get('Omeka\SiteSettings');
         $form = $event->getParam('form');
-        
+
         $fieldset = new Fieldset('sharing');
         $fieldset->setLabel('Sharing');
-        
-        
+
         $enabledMethods = $siteSettings->get('sharing_methods', array());
         $fieldset->add([
-            'name'     => 'sharing_methods',
-            'type'     => 'multiCheckbox',
-            'options'  => [
+            'name' => 'sharing_methods',
+            'type' => 'multiCheckbox',
+            'options' => [
                 'label' => 'Enable Sharing module for these methods', // @translate
                 'value_options' => [
-                    'fb'        => [
+                    'fb' => [
                                     'label' => 'Facebook', // @translate
                                     'value' => 'fb',
                                     'selected' => in_array('fb', $enabledMethods),
                                     ],
-                    'twitter'   => [
+                    'twitter' => [
                                     'label' => 'Twitter', // @translate
                                     'value' => 'twitter',
                                     'selected' => in_array('twitter', $enabledMethods),
                                    ],
-                    'tumblr'    => [
+                    'tumblr' => [
                                     'label' => 'Tumblr', // @translate
                                     'value' => 'tumblr',
                                     'selected' => in_array('tumblr', $enabledMethods),
@@ -116,12 +111,12 @@ class Module extends AbstractModule
                                     'value' => 'pinterest',
                                     'selected' => in_array('pinterest', $enabledMethods),
                                    ],
-                    'email'     => [
+                    'email' => [
                                     'label' => 'Email', // @translate
                                     'value' => 'email',
                                     'selected' => in_array('email', $enabledMethods),
                                    ],
-                    'embed'     => [
+                    'embed' => [
                                     'label' => 'Embed codes', // @translate
                                     'value' => 'embed',
                                     'selected' => in_array('embed', $enabledMethods),
@@ -138,14 +133,14 @@ class Module extends AbstractModule
     public function insertOpenGraphData($event)
     {
         $siteSettings = $this->getServiceLocator()->get('Omeka\SiteSettings');
-            $routeMatch = $this->getServiceLocator()->get('Application')
+        $routeMatch = $this->getServiceLocator()->get('Application')
                             ->getMvcEvent()->getRouteMatch();
-            $controller = $routeMatch->getParam('controller');
-            $view = $event->getTarget();
-            $escape = $view->plugin('escapeHtml');
-            $description = false;
-            $image = false;
-            switch  ($controller) {
+        $controller = $routeMatch->getParam('controller');
+        $view = $event->getTarget();
+        $escape = $view->plugin('escapeHtml');
+        $description = false;
+        $image = false;
+        switch ($controller) {
                 case 'Omeka\Controller\Site\Item' :
                     $description = $escape($view->item->displayDescription());
                     $view->headMeta()->appendProperty('og:description', $description);
@@ -159,7 +154,7 @@ class Module extends AbstractModule
                     $blocks = $view->page->blocks();
                     foreach ($blocks as $block) {
                         $attachments = $block->attachments();
-                        foreach($attachments as $attachment) {
+                        foreach ($attachments as $attachment) {
                             $item = $attachment->item();
                             if ($primaryMedia = $item->primaryMedia()) {
                                 $image = $escape($primaryMedia->thumbnailUrl('large'));
@@ -169,25 +164,25 @@ class Module extends AbstractModule
                     }
                 break;
             }
-            $view->headTitle()->setSeparator(' · ');
-            $pageTitle = $view->headTitle()->renderTitle() . ' · ' . $view->setting('installation_title', 'Omeka S');
-            $view->headMeta()->appendProperty('og:title', $pageTitle );
-            $view->headMeta()->appendProperty('og:type', 'website');
-            $view->headMeta()->appendProperty('og:url', $view->serverUrl(true));
-            if ($description) {
-                $view->headMeta()->appendProperty('og:description', $description);
-            }
+        $view->headTitle()->setSeparator(' · ');
+        $pageTitle = $view->headTitle()->renderTitle().' · '.$view->setting('installation_title', 'Omeka S');
+        $view->headMeta()->appendProperty('og:title', $pageTitle);
+        $view->headMeta()->appendProperty('og:type', 'website');
+        $view->headMeta()->appendProperty('og:url', $view->serverUrl(true));
+        if ($description) {
+            $view->headMeta()->appendProperty('og:description', $description);
+        }
 
-            if ($image) {
-                $view->headMeta()->appendProperty('og:image', $image);
-            }
+        if ($image) {
+            $view->headMeta()->appendProperty('og:image', $image);
+        }
     }
 
     public function viewShowAfter($event)
     {
         $siteSettings = $this->getServiceLocator()->get('Omeka\SiteSettings');
         $enabledMethods = $siteSettings->get('sharing_methods');
-        if (! empty($enabledMethods)) {
+        if (!empty($enabledMethods)) {
             $view = $event->getTarget();
             $view->headScript()->appendFile('https://platform.twitter.com/widgets.js');
             $view->headScript()->appendFile($view->assetUrl('js/sharing.js', 'Sharing'));
@@ -238,8 +233,8 @@ class Module extends AbstractModule
                 <script id="tumblr-js" async src="https://assets.tumblr.com/share-button.js"></script>
             ';
 
-            foreach($enabledMethods as $method) {
-                $js = $method . 'Javascript';
+            foreach ($enabledMethods as $method) {
+                $js = $method.'Javascript';
                 if (isset($$js)) {
                     echo $$js;
                 }
