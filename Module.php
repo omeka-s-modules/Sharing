@@ -26,13 +26,13 @@ class Module extends AbstractModule
     {
         $sharedEventManager->attach(
             'Omeka\Form\SiteSettingsForm',
-            Event::SITE_SETTINGS_ADD_ELEMENTS,
+            Event::ADD_ELEMENTS,
             [$this, 'addSiteEnableCheckbox']
         );
 
         $sharedEventManager->attach(
             'Omeka\Form\SiteSettingsForm',
-            Event::SITE_SETTINGS_ADD_INPUT_FILTERS,
+            Event::ADD_INPUT_FILTERS,
             [$this, 'addSiteSettingsFilters']
         );
 
