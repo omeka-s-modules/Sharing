@@ -3,10 +3,10 @@
 namespace Sharing;
 
 use Omeka\Module\AbstractModule;
-use Omeka\Event\Event;
 use Zend\Form\Fieldset;
 use Zend\EventManager\SharedEventManagerInterface;
 use Zend\Mvc\MvcEvent;
+use Zend\EventManager\Event;
 
 class Module extends AbstractModule
 {
@@ -26,13 +26,13 @@ class Module extends AbstractModule
     {
         $sharedEventManager->attach(
             'Omeka\Form\SiteSettingsForm',
-            Event::ADD_ELEMENTS,
+            'form.add_elements',
             [$this, 'addSiteEnableCheckbox']
         );
 
         $sharedEventManager->attach(
             'Omeka\Form\SiteSettingsForm',
-            Event::ADD_INPUT_FILTERS,
+            'form.add_input_filters',
             [$this, 'addSiteSettingsFilters']
         );
 
