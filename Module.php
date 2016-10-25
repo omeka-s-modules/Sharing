@@ -36,17 +36,24 @@ class Module extends AbstractModule
             [$this, 'addSiteSettingsFilters']
         );
 
-        $sharedEventManager->attach(
-                'Omeka\Controller\Site\Item',
+        $controllers = [
+            'Omeka\Controller\Site\Item',
+            'Omeka\Controller\Site\Page',
+        ];
+        
+        foreach ($controllers as $controller) {
+            $sharedEventManager->attach(
+                $controller,
                 'view.show.before',
-                array($this, 'viewShowAfter')
+                array($this, 'viewShow')
                 );
-
-        $sharedEventManager->attach(
-                'Omeka\Controller\Site\Page',
+            
+            $sharedEventManager->attach(
+                $controller,
                 'view.show.after',
-                array($this, 'viewShowAfter')
+                array($this, 'viewShow')
                 );
+        }
 
         $sharedEventManager->attach(
                 'Omeka\Controller\Site\Item',
@@ -79,12 +86,13 @@ class Module extends AbstractModule
     public function addSiteEnableCheckbox($event)
     {
         $siteSettings = $this->getServiceLocator()->get('Omeka\SiteSettings');
-        $form = $event->getParam('form');
+        $form = $event->getTarget();
 
         $fieldset = new Fieldset('sharing');
         $fieldset->setLabel('Sharing');
 
         $enabledMethods = $siteSettings->get('sharing_methods', array());
+        $placement = $siteSettings->get('sharing_placement', 'view.show.before');
         $fieldset->add([
             'name' => 'sharing_methods',
             'type' => 'multiCheckbox',
@@ -125,6 +133,30 @@ class Module extends AbstractModule
             ],
             'attributes' => [
                 'required' => false,
+            ],
+        ]);
+        
+        $fieldset->add([
+            'name' => 'sharing_placement',
+            'type' => 'radio',
+            'options' => [
+                'label' => "Sharing buttons placement on the page.",
+                'value_options' => [
+                    'top' => [
+                        'label' => 'Top', // @translate
+                        'value' => 'view.show.before'
+                    ],
+                
+                    'bottom' => [
+                        'label' => 'Bottom', //@translate
+                        'value' => 'view.show.after'
+                    ],
+                
+                ],
+            ],
+            'attributes' => [
+                'required' => false,
+                'value' => $placement,
             ],
         ]);
         $form->add($fieldset);
@@ -178,11 +210,13 @@ class Module extends AbstractModule
         }
     }
 
-    public function viewShowAfter($event)
+    public function viewShow($event)
     {
         $siteSettings = $this->getServiceLocator()->get('Omeka\SiteSettings');
         $enabledMethods = $siteSettings->get('sharing_methods');
-        if (!empty($enabledMethods)) {
+        $placement = $siteSettings->get('sharing_placement', 'view.show.before');
+        $eventName = $event->getName();
+        if (!empty($enabledMethods) && ($eventName == $placement)) {
             $view = $event->getTarget();
             $view->headScript()->appendFile('https://platform.twitter.com/widgets.js');
             $view->headScript()->appendFile($view->assetUrl('js/sharing.js', 'Sharing'));
