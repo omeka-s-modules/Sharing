@@ -45,32 +45,32 @@ class Module extends AbstractModule
             $sharedEventManager->attach(
                 $controller,
                 'view.show.before',
-                array($this, 'viewShow')
+                [$this, 'viewShow']
                 );
             
             $sharedEventManager->attach(
                 $controller,
                 'view.show.after',
-                array($this, 'viewShow')
+                [$this, 'viewShow']
                 );
         }
 
         $sharedEventManager->attach(
                 'Omeka\Controller\Site\Item',
                 'view.show.after',
-                array($this, 'insertOpenGraphData')
+                [$this, 'insertOpenGraphData']
                 );
 
         $sharedEventManager->attach(
                 'Omeka\Controller\Site\Index',
                 'view.show.after',
-                array($this, 'insertOpenGraphData')
+                [$this, 'insertOpenGraphData']
                 );
 
         $sharedEventManager->attach(
                'Omeka\Controller\Site\Page',
                 'view.show.after',
-                array($this, 'insertOpenGraphData')
+                [$this, 'insertOpenGraphData']
                 );
     }
 
@@ -91,7 +91,7 @@ class Module extends AbstractModule
         $fieldset = new Fieldset('sharing');
         $fieldset->setLabel('Sharing');
 
-        $enabledMethods = $siteSettings->get('sharing_methods', array());
+        $enabledMethods = $siteSettings->get('sharing_methods', []);
         $placement = $siteSettings->get('sharing_placement', 'view.show.before');
         $fieldset->add([
             'name' => 'sharing_methods',
@@ -227,13 +227,13 @@ class Module extends AbstractModule
                 ->getMvcEvent()->getRouteMatch()->getParam('site-slug');
 
             echo $view->partial('share-buttons',
-                    array('escape' => $escape,
+                    ['escape' => $escape,
                           'translator' => $translator,
                           'enabledMethods' => $enabledMethods,
                           'itemId' => isset($view->item) ? $view->item->id() : false,
                           'pageId' => isset($view->page) ? $view->page->id() : false,
                           'siteSlug' => $siteSlug,
-                            )
+                            ]
                     );
 
             $fbJavascript = "
