@@ -7,6 +7,7 @@ use Zend\Form\Fieldset;
 use Zend\EventManager\SharedEventManagerInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\EventManager\Event;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Module extends AbstractModule
 {
@@ -20,6 +21,13 @@ class Module extends AbstractModule
         parent::onBootstrap($event);
         $acl = $this->getServiceLocator()->get('Omeka\Acl');
         $acl->allow(null, 'Sharing\Controller\Index');
+    }
+
+    public function install(ServiceLocatorInterface $serviceLocator)
+    {
+        $controllerPluginManager = $serviceLocator->get('ControllerPluginManager');
+        $messenger = $controllerPluginManager->get('messenger');
+        $messenger->addSuccess('Sharing options are site-specific. Site owners will need to set the options for their sites.'); // @translate
     }
 
     public function attachListeners(SharedEventManagerInterface $sharedEventManager)
