@@ -148,7 +148,7 @@ class Module extends AbstractModule
             'name' => 'sharing_placement',
             'type' => 'radio',
             'options' => [
-                'label' => "Sharing buttons placement on the page.",
+                'label' => "Sharing buttons placement on the page",
                 'value_options' => [
                     'top' => [
                         'label' => 'Top', // @translate
