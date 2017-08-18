@@ -93,7 +93,7 @@ class Module extends AbstractModule
 
     public function addSiteEnableCheckbox($event)
     {
-        $siteSettings = $this->getServiceLocator()->get('Omeka\SiteSettings');
+        $siteSettings = $this->getServiceLocator()->get('Omeka\Settings\Site');
         $form = $event->getTarget();
 
         $fieldset = new Fieldset('sharing');
@@ -172,7 +172,7 @@ class Module extends AbstractModule
 
     public function insertOpenGraphData($event)
     {
-        $siteSettings = $this->getServiceLocator()->get('Omeka\SiteSettings');
+        $siteSettings = $this->getServiceLocator()->get('Omeka\Settings\Site');
         $routeMatch = $this->getServiceLocator()->get('Application')
                             ->getMvcEvent()->getRouteMatch();
         $controller = $routeMatch->getParam('controller');
@@ -220,7 +220,7 @@ class Module extends AbstractModule
 
     public function viewShow($event)
     {
-        $siteSettings = $this->getServiceLocator()->get('Omeka\SiteSettings');
+        $siteSettings = $this->getServiceLocator()->get('Omeka\Settings\Site');
         $enabledMethods = $siteSettings->get('sharing_methods');
         $placement = $siteSettings->get('sharing_placement', 'view.show.before');
         $eventName = $event->getName();
