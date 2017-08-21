@@ -6,6 +6,16 @@ return [
             'Sharing\Controller\Index' => 'Sharing\Controller\IndexController',
         ],
     ],
+    'translator' => [
+        'translation_file_patterns' => [
+            [
+                'type' => 'gettext',
+                'base_dir' => OMEKA_PATH . '/modules/Sharing/language',
+                'pattern' => '%s.mo',
+                'text_domain' => null,
+            ],
+        ],
+    ],
     'router' => [
         'routes' => [
                 'embed-item' => [

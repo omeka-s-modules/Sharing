@@ -97,7 +97,7 @@ class Module extends AbstractModule
         $form = $event->getTarget();
 
         $fieldset = new Fieldset('sharing');
-        $fieldset->setLabel('Sharing');
+        $fieldset->setLabel('Sharing'); // @translate
 
         $enabledMethods = $siteSettings->get('sharing_methods', []);
         $placement = $siteSettings->get('sharing_placement', 'view.show.before');
@@ -148,7 +148,7 @@ class Module extends AbstractModule
             'name' => 'sharing_placement',
             'type' => 'radio',
             'options' => [
-                'label' => "Sharing buttons placement on the page",
+                'label' => "Sharing buttons placement on the page", // @translate
                 'value_options' => [
                     'top' => [
                         'label' => 'Top', // @translate
