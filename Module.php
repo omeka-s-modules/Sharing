@@ -6,7 +6,6 @@ use Omeka\Module\AbstractModule;
 use Zend\Form\Fieldset;
 use Zend\EventManager\SharedEventManagerInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\EventManager\Event;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Module extends AbstractModule
@@ -48,14 +47,14 @@ class Module extends AbstractModule
             'Omeka\Controller\Site\Item',
             'Omeka\Controller\Site\Page',
         ];
-        
+
         foreach ($controllers as $controller) {
             $sharedEventManager->attach(
                 $controller,
                 'view.show.before',
                 [$this, 'viewShow']
                 );
-            
+
             $sharedEventManager->attach(
                 $controller,
                 'view.show.after',
@@ -143,7 +142,7 @@ class Module extends AbstractModule
                 'required' => false,
             ],
         ]);
-        
+
         $fieldset->add([
             'name' => 'sharing_placement',
             'type' => 'radio',
@@ -152,14 +151,14 @@ class Module extends AbstractModule
                 'value_options' => [
                     'top' => [
                         'label' => 'Top', // @translate
-                        'value' => 'view.show.before'
+                        'value' => 'view.show.before',
                     ],
-                
+
                     'bottom' => [
                         'label' => 'Bottom', //@translate
-                        'value' => 'view.show.after'
+                        'value' => 'view.show.after',
                     ],
-                
+
                 ],
             ],
             'attributes' => [
@@ -181,7 +180,7 @@ class Module extends AbstractModule
         $description = false;
         $image = false;
         switch ($controller) {
-                case 'Omeka\Controller\Site\Item' :
+                case 'Omeka\Controller\Site\Item':
                     $description = $escape($view->item->displayDescription());
                     $view->headMeta()->appendProperty('og:description', $description);
                     if ($primaryMedia = $view->item->primaryMedia()) {
