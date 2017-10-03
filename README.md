@@ -1,8 +1,8 @@
 # Sharing
 Omeka S module for sharing content via 1) Social Media and 2) Embedding Omeka S content in other sites
 
-# Installation and Configuration
+See the [Omeka S user manual](http://dev.omeka.org/docs/s/user-manual/modules/sharing/) for user documentation.
 
-A global administrator will have to install the module from the Modules page.
+## Installation
 
-For each Site, the services to be included in Sharing are on the Site Settings page.
+See general end user documentation for [Installing a module](http://dev.omeka.org/docs/s/user-manual/modules/modules/#installing-modules)
