@@ -43,7 +43,7 @@ li#sharing-email a:hover {
 
 li#sharing-email a:before {
     content: "\f0e0";
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
     font-weight: normal;
 }
 
@@ -62,6 +62,6 @@ li#sharing-embed a:hover {
 
 li#sharing-embed a:before {
     content: "\f121";
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
     font-weight: normal;
 }
