@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+# Translators:
+# Jiří Vírava <appukonrad@gmail.com>, 2018
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-08 12:12-0500\n"
+"PO-Revision-Date: 2017-09-14 19:41+0000\n"
+"Last-Translator: Jiří Vírava <appukonrad@gmail.com>, 2018\n"
+"Language-Team: Czech (https://www.transifex.com/omeka/teams/14184/cs/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+
+#: view/share-buttons.phtml:69
+msgid "Get embed code"
+msgstr "Získat kód pro vložení"
+
+#: Module.php:29
+msgid ""
+"Sharing options are site-specific. Site owners will need to set the options "
+"for their sites."
+msgstr ""
+
+#: Module.php:99
+msgid "Sharing"
+msgstr "Sdílení"
+
+#: Module.php:107
+msgid "Enable Sharing module for these methods"
+msgstr ""
+
+#: Module.php:110
+msgid "Facebook"
+msgstr "Facebook"
+
+#: Module.php:115
+msgid "Twitter"
+msgstr "Twitter"
+
+#: Module.php:120
+msgid "Tumblr"
+msgstr "Tumblr"
+
+#: Module.php:125
+msgid "Pinterest"
+msgstr "Pinterest"
+
+#: Module.php:135
+msgid "Embed codes"
+msgstr ""
+
+#: Module.php:150
+msgid "Sharing buttons placement on the page"
+msgstr ""
+
+#: Module.php:153
+msgid "Top"
+msgstr ""
+
+#: Module.php:158
+msgid "Bottom"
+msgstr ""
