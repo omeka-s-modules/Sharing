@@ -171,9 +171,7 @@ class Module extends AbstractModule
 
     public function insertOpenGraphData($event)
     {
-        $siteSettings = $this->getServiceLocator()->get('Omeka\Settings\Site');
-        $routeMatch = $this->getServiceLocator()->get('Application')
-                            ->getMvcEvent()->getRouteMatch();
+        $routeMatch = $this->getServiceLocator()->get('Application')->getMvcEvent()->getRouteMatch();
         $controller = $routeMatch->getParam('controller');
         $view = $event->getTarget();
         $escape = $view->plugin('escapeHtml');
@@ -182,10 +180,8 @@ class Module extends AbstractModule
         switch ($controller) {
                 case 'Omeka\Controller\Site\Item':
                     $description = $escape($view->item->displayDescription());
-                    $view->headMeta()->appendProperty('og:description', $description);
                     if ($primaryMedia = $view->item->primaryMedia()) {
                         $image = $escape($primaryMedia->thumbnailUrl('large'));
-                        $view->headMeta()->appendProperty('og:image', $image);
                     }
                 break;
 
