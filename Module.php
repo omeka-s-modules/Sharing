@@ -180,6 +180,7 @@ class Module extends AbstractModule
         switch ($controller) {
                 case 'Omeka\Controller\Site\Item':
                     $description = $escape($view->item->displayDescription());
+                    $title = $escape($view->item->displayTitle()).' · '.$view->setting('installation_title', 'Omeka S');
                     if ($primaryMedia = $view->item->primaryMedia()) {
                         $image = $escape($primaryMedia->thumbnailUrl('large'));
                     }
@@ -187,6 +188,7 @@ class Module extends AbstractModule
 
                 case 'Omeka\Controller\Site\Page':
                     $blocks = $view->page->blocks();
+                    $title = $view->headTitle()->renderTitle().' · '.$view->setting('installation_title', 'Omeka S');
                     foreach ($blocks as $block) {
                         $attachments = $block->attachments();
                         foreach ($attachments as $attachment) {
@@ -200,8 +202,7 @@ class Module extends AbstractModule
                 break;
             }
         $view->headTitle()->setSeparator(' · ');
-        $pageTitle = $view->headTitle()->renderTitle().' · '.$view->setting('installation_title', 'Omeka S');
-        $view->headMeta()->appendProperty('og:title', $pageTitle);
+        $view->headMeta()->appendProperty('og:title', $title);
         $view->headMeta()->appendProperty('og:type', 'website');
         $view->headMeta()->appendProperty('og:url', $view->serverUrl(true));
         if ($description) {
