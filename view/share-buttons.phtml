@@ -7,7 +7,7 @@ $url = $this->serverUrl(true);
 <ul id='sharing-buttons'>
     <?php if(in_array('fb', $enabledMethods)) :?>
     <li id='sharing-fb' class='sharing-button'>
-        <div class="fb-share-button" 
+        <div class="fb-share-button fb-xfbml-parse-ignore"
             data-href="<?php echo $this->serverUrl(true); ?>"
             data-layout="button">
         </div>
