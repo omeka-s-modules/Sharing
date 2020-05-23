@@ -218,7 +218,7 @@ class Module extends AbstractModule
             'type' => 'radio',
             'options' => [
                 'label' => "Sharing buttons size", // @translate
-                'info' => "Change the height of the buttons. Small 20px, Large 28px. Large is better for touch devices.",
+                'info' => "Change the height of the buttons. Small 20px, Large 28px. Large is better for touch devices. (Doesn't work for Tumblr button...)",
                 'value_options' => [
                     'top' => [
                         'label' => 'Small', // @translate
@@ -258,6 +258,20 @@ class Module extends AbstractModule
             'attributes' => [
                 'required' => false,
                 'value' => $siteSettings->get('sharing_facebook_app_id', ''),
+            ],
+        ]);
+
+        $fieldset->add([
+            'type' => 'checkbox',
+            'name' => 'sharing_facebook_display_count',
+            'options' => [
+                'label' => 'Facebook display share count', // @translate
+                'info' => 'Do you want your Facebook button to display a share count ?', // @translate
+                'checked_value' => 'yes',
+                'unchecked_value' => 'no',
+            ],
+            'attributes' => [
+                'value' => $siteSettings->get('sharing_facebook_display_count', 'no'),
             ],
         ]);
 

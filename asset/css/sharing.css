@@ -2,17 +2,17 @@
     display: flex;
     flex-wrap: wrap;
     z-index: 1;
+    align-items: flex-end;
 }
 
 .sharing-module__container > * {
-    margin: 8px 8px 0 0;
+    margin: 8px 4px;
 }
 
 .sharing-module__email-button,
 .sharing-module__embed-button {
     font-size: 11px;
     vertical-align: middle;
-    height: 20px;
     padding: 0 6px;
     font-family: "Helvetica Neue", "HelveticaNeue" , "Helvetica", "Arial", sans-serif;
     font-weight: 500;
@@ -21,6 +21,8 @@
 }
 
 .sharing-module__email-button {
+    height: 20px;
+    line-height: 20px;
     background-color: #555;
     border-radius: 3px;
     color: #fff;
@@ -42,6 +44,8 @@
     background-color: #fff;
     border: 1px solid #c2c2c2;
     border-radius: 3px;
+    height: 18px;
+    line-height: 18px;
 }
 
 .sharing-module__embed-button:hover {
