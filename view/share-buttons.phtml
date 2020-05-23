@@ -1,73 +1,90 @@
 <?php
 $this->headTitle()->setSeparator(' · ');
-$pageTitle = $this->headTitle()->renderTitle() . ' · ' . $this->setting('installation_title', 'Omeka S');
+$installationTitle = $this->setting('installation_title', 'Omeka S');
+$buttonSize = $this->siteSetting('sharing_buttons_size', 'en_US');
 $url = $this->serverUrl(true);
 ?>
 
-<ul id='sharing-buttons'>
-    <?php if(in_array('fb', $enabledMethods)) :?>
-    <li id='sharing-fb' class='sharing-button'>
-        <div class="fb-share-button fb-xfbml-parse-ignore"
-            data-href="<?php echo $this->serverUrl(true); ?>"
-            data-layout="button">
+<div class="sharing-module__container">
+    <?php if (in_array('fb', $enabledMethods)) : ?>
+        <div class="fb-share-button fb-xfbml-parse-ignore sharing-module__facebook-button"
+             data-size="<?php echo $buttonSize ?>"
+             data-href="<?php echo $this->serverUrl(true); ?>"
+             data-layout="button_count">
         </div>
-    </li>
     <?php endif; ?>
-    <?php if(in_array('twitter', $enabledMethods)) :?>
-    <li id='sharing-twitter' class='sharing-button'>
-        <a href="https://twitter.com/share" class="twitter-share-button"></a>
-    </li>
+    <?php if (in_array('twitter', $enabledMethods)) : ?>
+        <a href="https://twitter.com/share"
+           class="twitter-share-button sharing-module__twitter-button"
+           data-size="<?php echo $buttonSize ?>"></a>
     <?php endif; ?>
-    <?php if(in_array('pinterest', $enabledMethods)) :?>
-    <li id='sharing-pinterest' class='sharing-button'>
-        <a data-pin-do="buttonBookmark" href="https://www.pinterest.com/pin/create/button/"></a>
-    </li>
+    <?php if (in_array('pinterest', $enabledMethods)) : ?>
+        <a data-pin-do="buttonBookmark"
+           href="https://www.pinterest.com/pin/create/button/"
+           data-pin-tall="<?php echo $buttonSize === 'large' ? 'true' : 'false'; ?>"></a>
     <?php endif; ?>
-    <?php if(in_array('tumblr', $enabledMethods)) :?>
-    <li id='sharing-tumblr' class='sharing-button'>
-        <a class="tumblr-share-button" 
-           data-color="blue" 
+    <?php if (in_array('tumblr', $enabledMethods)) : ?>
+        <a class="tumblr-share-button sharing-module__tumblr-button"
+           data-color="white"
+           data-size="<?php echo $buttonSize ?>"
            href="https://embed.tumblr.com/share">
-       </a>
-    </li>
-    <?php endif; ?>
-    <?php if(in_array('email', $enabledMethods)) :?>
-    <li id='sharing-email' class='sharing-button'>
-        <a 
-            href="mailto:?subject=<?php echo $escape($pageTitle); ?>&body=<?php echo $url; ?>">
-        <?php echo $translator->translate('Email'); ?>
         </a>
-    </li>
     <?php endif; ?>
-    <?php if(in_array('embed', $enabledMethods) ): ?>
+    <?php if (in_array('email', $enabledMethods)) : ?>
+        <a class="sharing-module__email-button sharing-module__email-button--large" href="mailto:?subject=<?php echo $escape($title); ?>&body=<?php echo $url; ?>">
+            <!-- Font Awesome SVG icon licensed under CC BY 4.0 https://creativecommons.org/licenses/by/4.0/ -->
+            <svg width="1em" height="1em" style="vertical-align: -0.125em;" aria-hidden="true" focusable="false" version="1.1" viewBox="0 0 21.333 16"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path d="m20.929 5.2833c0.1625-0.12917 0.40417-0.0083 0.40417 0.19583v8.5208c0 1.1042-0.89583 2-2 2h-17.333c-1.1042 0-2-0.89583-2-2v-8.5167c0-0.20833 0.2375-0.325 0.40417-0.19583 0.93333 0.725 2.1708 1.6458 6.4208 4.7333 0.87917 0.64167 2.3625 1.9917 3.8417 1.9833 1.4875 0.0125 3-1.3667 3.8458-1.9833 4.25-3.0875 5.4833-4.0125 6.4167-4.7375zm-10.262 5.3833c0.96667 0.01667 2.3583-1.2167 3.0583-1.725 5.5292-4.0125 5.95-4.3625 7.225-5.3625 0.24167-0.1875 0.38333-0.47917 0.38333-0.7875v-0.79167c0-1.1042-0.89583-2-2-2h-17.333c-1.1042 0-2 0.89583-2 2v0.79167c0 0.30833 0.14167 0.59583 0.38333 0.7875 1.275 0.99583 1.6958 1.35 7.225 5.3625 0.7 0.50833 2.0917 1.7417 3.0583 1.725z"
+                      fill="currentColor" stroke-width=".041667"/>
+            </svg>
 
-    <?php
-    if ($itemId) {
-        $embedUrl = $this->url('embed-item',
-                             array('controller' => 'index',
-                                   'action'     => 'embed-item',
-                                   'item-id'    => $itemId,
-                                   'site-slug'  => $siteSlug,
-                                   ),
-                             array('force_canonical' => true)
-         );
-    }
-
-    if ($pageId) {
-        $embedUrl = $this->url('embed-page',
-                             array('controller' => 'index',
-                                   'action'     => 'embed-page',
-                                   'page-id'    => $pageId,
-                                   ),
-                             array('force_canonical' => true)
-         );
-
-    }
-    ?>
-    <li id='sharing-embed' class='sharing-button'>
-        <a data-embed-url="<?php echo $embedUrl; ?>">
-        <?php echo $translator->translate('Get embed code'); ?>
+            <?php echo $translator->translate('Email'); ?>
         </a>
-    </li>
-    <?php endif;?>
-</ul>
+    <?php endif; ?>
+    <?php if (in_array('embed', $enabledMethods)): ?>
+
+        <?php
+        if ($itemId) {
+            $embedUrl = $this->url('embed-item',
+                array('controller' => 'index',
+                    'action' => 'embed-item',
+                    'item-id' => $itemId,
+                    'site-slug' => $siteSlug,
+                ),
+                array('force_canonical' => true)
+            );
+        }
+
+        if ($pageId) {
+            $embedUrl = $this->url('embed-page',
+                array('controller' => 'index',
+                    'action' => 'embed-page',
+                    'page-id' => $pageId,
+                ),
+                array('force_canonical' => true)
+            );
+        }
+
+        if ($itemSetId) {
+            $embedUrl = $this->url('embed-item-set',
+                array('controller' => 'index',
+                    'action' => 'embed-item-set',
+                    'item-set-id' => $itemSetId,
+                    'site-slug' => $siteSlug,
+                ),
+                array('force_canonical' => true)
+            );
+        }
+        ?>
+        <a class="sharing-module__embed-button sharing-module__embed-button--large" data-embed-url="<?php echo $embedUrl; ?>">
+            <!-- Font Awesome SVG icon licensed under CC BY 4.0 https://creativecommons.org/licenses/by/4.0/ -->
+            <svg width="1em" height="1em" style="vertical-align: -0.125em;" aria-hidden="true" focusable="false" role="img" version="1.1" viewBox="0 0 20.003 16"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path d="m8.7171 15.984-1.9064-0.55317c-0.20002-0.056254-0.31252-0.26564-0.25627-0.46566l4.2659-14.695c0.05625-0.20002 0.26564-0.31252 0.46566-0.25627l1.9064 0.55317c0.20002 0.056254 0.31252 0.26564 0.25627 0.46566l-4.2659 14.695c-0.059379 0.20002-0.26564 0.31565-0.46566 0.25627zm-3.5628-3.5065 1.3595-1.4501c0.14376-0.15314 0.13439-0.3969-0.025002-0.53754l-2.8315-2.4908 2.8315-2.4908c0.15939-0.14064 0.17189-0.3844 0.025002-0.53754l-1.3595-1.4501c-0.14064-0.15001-0.37815-0.15939-0.53129-0.015626l-4.5035 4.2191c-0.15939 0.14689-0.15939 0.40003 0 0.54692l4.5035 4.2222c0.15314 0.14376 0.39065 0.13751 0.53129-0.01563zm10.226 0.01875 4.5035-4.2222c0.15939-0.14689 0.15939-0.40003 0-0.54692l-4.5035-4.2253c-0.15001-0.14064-0.38753-0.13439-0.53129 0.015626l-1.3595 1.4501c-0.14376 0.15314-0.13438 0.3969 0.025 0.53754l2.8315 2.4939-2.8315 2.4908c-0.15939 0.14064-0.17189 0.3844-0.025 0.53754l1.3595 1.4501c0.14064 0.15314 0.37815 0.15939 0.53129 0.01875z"
+                      fill="currentColor" stroke-width=".031252"/>
+            </svg>
+            <?php echo $translator->translate('Get embed code'); ?>
+        </a>
+    <?php endif; ?>
+</div>

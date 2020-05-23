@@ -1,71 +1,57 @@
-ul#sharing-buttons {
-    list-style: none;
-    line-height: 20px;
-    height: 20px;
-    padding-left: 0px;
-    clear: both;
+.sharing-module__container {
     display: flex;
+    flex-wrap: wrap;
+    z-index: 1;
 }
 
-ul#sharing-buttons li {
-    margin-right: 3px;
+.sharing-module__container > * {
+    margin: 8px 8px 0 0;
 }
 
-.fb-share-button span,
-li#sharing-pinterest span {
-    vertical-align: top !important;
-}
-
-ul#sharing-buttons li#sharing-tumblr {
-    margin-right: 1px;
-}
-
-li#sharing-email a, 
-li#sharing-embed a {
+.sharing-module__email-button,
+.sharing-module__embed-button {
     font-size: 11px;
-    vertical-align: top;
-    cursor: pointer;
+    vertical-align: middle;
     height: 20px;
-    line-height: 20px;
-    padding: 0 5px;
-    display: inline-block;
+    padding: 0 6px;
     font-family: "Helvetica Neue", "HelveticaNeue" , "Helvetica", "Arial", sans-serif;
     font-weight: 500;
     text-decoration: none;
     color: #666;
 }
 
-li#sharing-email a {
+.sharing-module__email-button {
     background-color: #555;
     border-radius: 3px;
     color: #fff;
 }
 
-li#sharing-email a:hover {
+.sharing-module__email-button:hover {
     border: 0;
     background-color: #3f3f3f;
 }
-
-li#sharing-email a:before {
-    content: "\f0e0";
-    font-family: "Font Awesome 5 Free";
-    font-weight: normal;
+.sharing-module__email-button--large {
+    height: 28px;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 28px;
 }
 
-li#sharing-embed a {
+.sharing-module__embed-button {
+    cursor: pointer;
     background-color: #fff;
     border: 1px solid #c2c2c2;
     border-radius: 3px;
-    line-height: 18px;
 }
 
-li#sharing-embed a:hover {
+.sharing-module__embed-button:hover {
     background-color: #eee;
     color: #666;
 }
 
-li#sharing-embed a:before {
-    content: "\f121";
-    font-family: "Font Awesome 5 Free";
-    font-weight: normal;
+.sharing-module__embed-button--large {
+    height: 26px;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 26px;
 }

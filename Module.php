@@ -214,6 +214,29 @@ class Module extends AbstractModule
         ]);
 
         $fieldset->add([
+            'name' => 'sharing_buttons_size',
+            'type' => 'radio',
+            'options' => [
+                'label' => "Sharing buttons size", // @translate
+                'info' => "Change the height of the buttons. Small 20px, Large 28px. Large is better for touch devices.",
+                'value_options' => [
+                    'top' => [
+                        'label' => 'Small', // @translate
+                        'value' => 'small',
+                    ],
+                    'bottom' => [
+                        'label' => 'Large', //@translate
+                        'value' => 'large',
+                    ],
+                ],
+            ],
+            'attributes' => [
+                'required' => false,
+                'value' => $siteSettings->get('sharing_buttons_size', 'large'),
+            ],
+        ]);
+
+        $fieldset->add([
             'name' => 'sharing_facebook_locale',
             'type' => 'Text',
             'options' => [
@@ -336,13 +359,25 @@ class Module extends AbstractModule
             $escape = $view->plugin('escapeHtml');
             $translator = $this->getServiceLocator()->get('MvcTranslator');
             $siteSlug = $this->getServiceLocator()->get('Application')->getMvcEvent()->getRouteMatch()->getParam('site-slug');
+            $installationTitle = $view->setting('installation_title', 'Omeka S');
+            $title = $view->headTitle()->renderTitle();
+
+            if(isset($view->item)) {
+                $title = $escape($view->item->displayTitle());
+            } elseif (isset($view->itemSet)) {
+                $title = $title = $escape($view->itemSet->displayTitle());
+            }
+
+            $title = $title . ' · ' . $installationTitle;
 
             echo $view->partial('share-buttons',
                 ['escape' => $escape,
                     'translator' => $translator,
                     'enabledMethods' => $enabledMethods,
+                    'title' => $title,
                     'itemId' => isset($view->item) ? $view->item->id() : false,
                     'pageId' => isset($view->page) ? $view->page->id() : false,
+                    'itemSetId' => isset($view->itemSet) ? $view->itemSet->id() : false,
                     'siteSlug' => $siteSlug,
                 ]
             );
