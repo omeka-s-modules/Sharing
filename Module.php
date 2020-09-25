@@ -195,7 +195,7 @@ class Module extends AbstractModule
                         $attachments = $block->attachments();
                         foreach ($attachments as $attachment) {
                             $item = $attachment->item();
-                            if ($primaryMedia = $item->primaryMedia()) {
+                            if ($item && ($primaryMedia = $item->primaryMedia())) {
                                 $image = $escape($primaryMedia->thumbnailUrl('large'));
                                 break 2;
                             }
