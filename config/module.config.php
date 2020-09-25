@@ -44,7 +44,7 @@ return [
     ],
     'view_manager' => [
         'template_path_stack' => [
-            OMEKA_PATH.'/modules/Sharing/view',
+            OMEKA_PATH . '/modules/Sharing/view',
         ],
     ],
 ];
