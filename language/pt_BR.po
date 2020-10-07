@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Khaidav T. <khaidaw@yahoo.com>, 2020
+# Rafael Trindade <drafael@usp.br>, 2020
 # 
 #, fuzzy
 msgid ""
@@ -13,31 +13,33 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-08 12:12-0500\n"
 "PO-Revision-Date: 2017-09-14 19:41+0000\n"
-"Last-Translator: Khaidav T. <khaidaw@yahoo.com>, 2020\n"
-"Language-Team: Mongolian (https://www.transifex.com/omeka/teams/14184/mn/)\n"
+"Last-Translator: Rafael Trindade <drafael@usp.br>, 2020\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/omeka/teams/14184/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: mn\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: view/share-buttons.phtml:69
 msgid "Get embed code"
-msgstr ""
+msgstr "Obter código de incorporação"
 
 #: Module.php:29
 msgid ""
 "Sharing options are site-specific. Site owners will need to set the options "
 "for their sites."
 msgstr ""
+"As opções de compartilhamento são específicas do site. Os proprietários do "
+"site precisarão definir as opções para seus sites."
 
 #: Module.php:99
 msgid "Sharing"
-msgstr "Хуваалцах"
+msgstr "Compartilhar"
 
 #: Module.php:107
 msgid "Enable Sharing module for these methods"
-msgstr "Эдгээр аргад зориулсан хуваалцах модулыг идэвхжүүлэх"
+msgstr "Ative o módulo de compartilhamento para esses métodos"
 
 #: Module.php:110
 msgid "Facebook"
@@ -57,16 +59,16 @@ msgstr "Pinterest"
 
 #: Module.php:135
 msgid "Embed codes"
-msgstr ""
+msgstr "Códigos incorporados"
 
 #: Module.php:150
 msgid "Sharing buttons placement on the page"
-msgstr ""
+msgstr "Posicionamento dos botões de compartilhamento na página"
 
 #: Module.php:153
 msgid "Top"
-msgstr "Дээд"
+msgstr "Topo"
 
 #: Module.php:158
 msgid "Bottom"
-msgstr "Доод"
+msgstr "Inferior"
