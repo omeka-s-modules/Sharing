@@ -22,6 +22,21 @@ class IndexController extends AbstractActionController
         return $view;
     }
 
+    public function embedItemSetAction()
+    {
+        $itemSetId = $this->params('item-set-id');
+        $siteSlug = $this->params('site-slug');
+        $response = $this->api()->read('item_sets', $itemSetId);
+        $itemSet = $response->getContent();
+
+        $view = new ViewModel();
+        $view->setTerminal(true);
+        $view->setVariable('itemSet', $itemSet);
+        $view->setVariable('siteSlug', $siteSlug);
+
+        return $view;
+    }
+
     public function embedPageAction()
     {
         $pageId = $this->params('page-id');

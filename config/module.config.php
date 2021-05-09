@@ -18,28 +18,39 @@ return [
     ],
     'router' => [
         'routes' => [
-                'embed-item' => [
-                    'type' => 'Segment',
-                    'options' => [
-                        'route' => '/embed-item/:site-slug/:item-id',
-                        'defaults' => [
-                            '__NAMESPACE__' => 'Sharing\Controller',
-                            'controller' => 'Index',
-                            'action' => 'embedItem',
-                        ],
+            'embed-item' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/embed-item/:site-slug/:item-id',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Sharing\Controller',
+                        'controller' => 'Index',
+                        'action' => 'embedItem',
                     ],
                 ],
-                'embed-page' => [
-                    'type' => 'Segment',
-                    'options' => [
-                        'route' => '/embed-page/:page-id',
-                        'defaults' => [
-                            '__NAMESPACE__' => 'Sharing\Controller',
-                            'controller' => 'Index',
-                            'action' => 'embedPage',
-                        ],
+            ],
+            'embed-item-set' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/embed-item-set/:site-slug/:item-set-id',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Sharing\Controller',
+                        'controller' => 'Index',
+                        'action' => 'embedItemSet',
                     ],
                 ],
+            ],
+            'embed-page' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/embed-page/:page-id',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Sharing\Controller',
+                        'controller' => 'Index',
+                        'action' => 'embedPage',
+                    ],
+                ],
+            ],
         ],
     ],
     'view_manager' => [

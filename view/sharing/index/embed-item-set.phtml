@@ -10,7 +10,7 @@ $escape = $this->plugin('escapeHtml');
             margin: 8px;
             font-family: "Helvetica Neue", "HelveticaNeue" , "Helvetica", "Arial", sans-serif;
         }
-        .sharing-module-embed-item {
+        .sharing-module-embed-item-set {
             width: 560px;
             display: flex;
             z-index: 1;
@@ -21,7 +21,7 @@ $escape = $this->plugin('escapeHtml');
             max-width: 150px;
         }
 
-        .sharing-module-embed-item__text-container {
+        .sharing-module-embed-item-set__text-container {
             width: 240px;
             display: flex;
             flex-direction: column;
@@ -30,13 +30,13 @@ $escape = $this->plugin('escapeHtml');
             margin: 0 8px;
         }
 
-        .sharing-module-embed-item__text-container h1 {
+        .sharing-module-embed-item-set__text-container h1 {
             margin: 0;
             font-weight: 500;
             font-size: 18px;
         }
 
-        .sharing-module-embed-item__text-container h2 {
+        .sharing-module-embed-item-set__text-container h2 {
             margin: 8px 0;
             font-weight: 400;
             font-size: 14px;
@@ -44,31 +44,31 @@ $escape = $this->plugin('escapeHtml');
             text-transform: uppercase;
         }
 
-        .sharing-module-embed-item__text-container p {
+        .sharing-module-embed-item-set__text-container p {
             margin: 8px 0;
             font-size: 14px;
             color: #5F676F;
         }
 
-        .sharing-module-embed-item__text-container h1 a {
+        .sharing-module-embed-item-set__text-container h1 a {
             color: #1D2028;
             text-decoration: none;
         }
     </style>
 </head>
 <body>
-<div class="sharing-module-embed-item">
+<div class="sharing-module-embed-item-set">
     <?php
-    if ($primaryMedia = $item->primaryMedia()) {
-        $image = $escape($primaryMedia->thumbnailUrl('medium'));
+    if ($thumbnail = $itemSet->thumbnail()) {
+        $image = $escape($thumbnail->assetUrl());
         echo "<img src='$image'></img>";
     }
     ?>
-    <div class='sharing-module-embed-item__text-container'>
+    <div class='sharing-module-embed-item-set__text-container'>
         <h2><?php echo $_SERVER['HTTP_HOST']; ?></h2>
-        <h1><a href='<?php echo $item->siteUrl($siteSlug, true); ?>'><?php echo $item->displayTitle() . ' · ' . $this->setting('installation_title', 'Omeka S'); ?></a></h1>
+        <h1><a href='<?php echo $itemSet->siteUrl($siteSlug, true); ?>'><?php echo $itemSet->displayTitle() . ' · ' . $this->setting('installation_title', 'Omeka S'); ?></a></h1>
         <p>
-            <?php echo $item->displayDescription(); ?>
+            <?php echo $itemSet->displayDescription(); ?>
         </p>
     </div>
 </div>
