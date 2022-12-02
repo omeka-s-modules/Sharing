@@ -84,10 +84,10 @@ class Module extends AbstractModule
     public function addSiteSettingsFilters($event)
     {
         $inputFilter = $event->getParam('inputFilter');
-        $inputFilter->get('sharing')->add([
-                    'name' => 'sharing_methods',
-                    'required' => false,
-                ]);
+        $inputFilter->add([
+            'name' => 'sharing_methods',
+            'required' => false,
+        ]);
     }
 
     public function addSiteEnableCheckbox($event)
@@ -95,15 +95,17 @@ class Module extends AbstractModule
         $siteSettings = $this->getServiceLocator()->get('Omeka\Settings\Site');
         $form = $event->getTarget();
 
-        $fieldset = new Fieldset('sharing');
-        $fieldset->setLabel('Sharing'); // @translate
+        $groups = $form->getOption('element_groups');
+        $groups['sharing'] = 'Sharing'; // @translate
+        $form->setOption('element_groups', $groups);
 
         $enabledMethods = $siteSettings->get('sharing_methods', []);
         $placement = $siteSettings->get('sharing_placement', 'view.show.before');
-        $fieldset->add([
+        $form->add([
             'name' => 'sharing_methods',
             'type' => 'multiCheckbox',
             'options' => [
+                'element_group' => 'sharing',
                 'label' => 'Enable Sharing module for these methods', // @translate
                 'value_options' => [
                     'fb' => [
@@ -143,10 +145,11 @@ class Module extends AbstractModule
             ],
         ]);
 
-        $fieldset->add([
+        $form->add([
             'name' => 'sharing_placement',
             'type' => 'radio',
             'options' => [
+                'element_group' => 'sharing',
                 'label' => "Sharing buttons placement on the page", // @translate
                 'value_options' => [
                     'top' => [
@@ -166,7 +169,6 @@ class Module extends AbstractModule
                 'value' => $placement,
             ],
         ]);
-        $form->add($fieldset);
     }
 
     public function insertOpenGraphData($event)
