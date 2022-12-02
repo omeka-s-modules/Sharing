@@ -4,8 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Latino Imparato <latino.imparato@gmail.com>, 2018
-# Giorgio Comai <g@giorgiocomai.eu>, 2018
+# Tzvetan Tzvetanski <ceibg.org@gmail.com>, 2021
 # 
 #, fuzzy
 msgid ""
@@ -14,41 +13,41 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-08 12:12-0500\n"
 "PO-Revision-Date: 2017-09-14 19:41+0000\n"
-"Last-Translator: Giorgio Comai <g@giorgiocomai.eu>, 2018\n"
-"Language-Team: Italian (https://www.transifex.com/omeka/teams/14184/it/)\n"
+"Last-Translator: Tzvetan Tzvetanski <ceibg.org@gmail.com>, 2021\n"
+"Language-Team: Bulgarian (Bulgaria) (https://www.transifex.com/omeka/teams/14184/bg_BG/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
-"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"Language: bg_BG\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: view/share-buttons.phtml:69
 msgid "Get embed code"
-msgstr "Ottieni il codice da integrare"
+msgstr "Вземи кода за вграждане"
 
 #: Module.php:29
 msgid ""
 "Sharing options are site-specific. Site owners will need to set the options "
 "for their sites."
 msgstr ""
-"Le opzioni di condivisione sono specifiche ad ogni sito. I proprietari dei "
-"siti dovranno impostare le opzioni per i loro siti."
+"Опциите за споделяне са специфични за сайта. Собствениците на сайтове ще "
+"трябва да зададат опциите за своите сайтове."
 
 #: Module.php:99
 msgid "Sharing"
-msgstr "Condivisione"
+msgstr "Споделяне"
 
 #: Module.php:107
 msgid "Enable Sharing module for these methods"
-msgstr "Attiva il modulo di condivisione per questi metodi"
+msgstr "Разреши модула за споделяне за тези методи"
 
 #: Module.php:110
 msgid "Facebook"
-msgstr "Facebook"
+msgstr "Фейсбук"
 
 #: Module.php:115
 msgid "Twitter"
-msgstr "Twitter"
+msgstr "Туитър"
 
 #: Module.php:120
 msgid "Tumblr"
@@ -60,16 +59,16 @@ msgstr "Pinterest"
 
 #: Module.php:135
 msgid "Embed codes"
-msgstr "Integra i codici"
+msgstr "Кодове за вграждане"
 
 #: Module.php:150
 msgid "Sharing buttons placement on the page"
-msgstr "Posizionamento sulla pagia dei pulsanti di condivisione"
+msgstr "Разполагане на бутони за споделяне на страницата"
 
 #: Module.php:153
 msgid "Top"
-msgstr "In alto"
+msgstr "Горе"
 
 #: Module.php:158
 msgid "Bottom"
-msgstr "In basso"
+msgstr "Отдолу"
