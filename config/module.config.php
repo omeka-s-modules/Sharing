@@ -1,50 +1,64 @@
 <?php
+namespace Sharing;
+
+use Laminas\Router\Http;
 
 return [
-    'controllers' => [
-        'invokables' => [
-            'Sharing\Controller\Index' => 'Sharing\Controller\IndexController',
+    'view_manager' => [
+        'template_path_stack' => [
+            sprintf('%s/../view', __DIR__),
         ],
     ],
     'translator' => [
         'translation_file_patterns' => [
             [
                 'type' => 'gettext',
-                'base_dir' => OMEKA_PATH . '/modules/Sharing/language',
+                'base_dir' => sprintf('%s/../language', __DIR__),
                 'pattern' => '%s.mo',
                 'text_domain' => null,
             ],
         ],
     ],
-    'router' => [
-        'routes' => [
-                'embed-item' => [
-                    'type' => 'Segment',
-                    'options' => [
-                        'route' => '/embed-item/:site-slug/:item-id',
-                        'defaults' => [
-                            '__NAMESPACE__' => 'Sharing\Controller',
-                            'controller' => 'Index',
-                            'action' => 'embedItem',
-                        ],
-                    ],
-                ],
-                'embed-page' => [
-                    'type' => 'Segment',
-                    'options' => [
-                        'route' => '/embed-page/:page-id',
-                        'defaults' => [
-                            '__NAMESPACE__' => 'Sharing\Controller',
-                            'controller' => 'Index',
-                            'action' => 'embedPage',
-                        ],
-                    ],
-                ],
+    'controllers' => [
+        'invokables' => [
+            'Sharing\Controller\Index' => Controller\IndexController::class,
+            'Sharing\Controller\Oembed' => Controller\OembedController::class,
         ],
     ],
-    'view_manager' => [
-        'template_path_stack' => [
-            OMEKA_PATH . '/modules/Sharing/view',
+    'router' => [
+        'routes' => [
+            'embed-item' => [
+                'type' => Http\Segment::class,
+                'options' => [
+                    'route' => '/embed-item/:site-slug/:item-id',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Sharing\Controller',
+                        'controller' => 'Index',
+                        'action' => 'embedItem',
+                    ],
+                ],
+            ],
+            'embed-page' => [
+                'type' => Http\Segment::class,
+                'options' => [
+                    'route' => '/embed-page/:page-id',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Sharing\Controller',
+                        'controller' => 'Index',
+                        'action' => 'embedPage',
+                    ],
+                ],
+            ],
+            'oembed' => [
+                'type' => Http\Literal::class,
+                'options' => [
+                    'route' => '/oembed',
+                    'defaults' => [
+                        'controller' => 'Sharing\Controller\Oembed',
+                        'action' => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
 ];

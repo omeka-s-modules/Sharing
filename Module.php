@@ -4,6 +4,7 @@ namespace Sharing;
 
 use Omeka\Module\AbstractModule;
 use Laminas\Form\Fieldset;
+use Laminas\EventManager\Event;
 use Laminas\EventManager\SharedEventManagerInterface;
 use Laminas\Mvc\MvcEvent;
 use Laminas\ServiceManager\ServiceLocatorInterface;
@@ -19,7 +20,7 @@ class Module extends AbstractModule
     {
         parent::onBootstrap($event);
         $acl = $this->getServiceLocator()->get('Omeka\Acl');
-        $acl->allow(null, 'Sharing\Controller\Index');
+        $acl->allow(null, ['Sharing\Controller\Index', 'Sharing\Controller\Oembed']);
     }
 
     public function install(ServiceLocatorInterface $serviceLocator)
@@ -79,6 +80,25 @@ class Module extends AbstractModule
                 'view.show.after',
                 [$this, 'insertOpenGraphData']
                 );
+
+        // Add discoverable oEmbed head links to public resource pages.
+        $resources = [
+            'Omeka\Controller\Site\Item',
+            'Omeka\Controller\Site\Media',
+        ];
+        foreach ($resources as $resource) {
+            $sharedEventManager->attach(
+                $resource,
+                'view.show.after',
+                function (Event $event) {
+                    $view = $event->getTarget();
+                    $resourceUrl = $view->url(null, [], ['force_canonical' => true], true);
+                    $resourceTitle = $view->resource->displayTitle();
+                    $oembed = $this->getServiceLocator()->get('Omeka\Oembed');
+                    $oembed->addHeadLink($view, $resourceUrl, $resourceTitle);
+                }
+            );
+        }
     }
 
     public function addSiteSettingsFilters($event)
