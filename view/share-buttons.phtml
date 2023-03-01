@@ -1,73 +1,65 @@
 <?php
 $this->headTitle()->setSeparator(' · ');
-$pageTitle = $this->headTitle()->renderTitle() . ' · ' . $this->setting('installation_title', 'Omeka S');
-$url = $this->serverUrl(true);
+$escape = $this->plugin('escapeHtml');
+$translate = $this->plugin('translate');
+$emailSubject = sprintf('%s · %s', $this->headTitle()->renderTitle(), $this->setting('installation_title', 'Omeka S'));
+$emailBody = $this->serverUrl(true);
 ?>
 
 <ul id='sharing-buttons'>
-    <?php if(in_array('fb', $enabledMethods)) :?>
+    <?php if (in_array('fb', $enabledMethods)) :?>
     <li id='sharing-fb' class='sharing-button'>
-        <div class="fb-share-button" 
-            data-href="<?php echo $this->serverUrl(true); ?>"
-            data-layout="button">
-        </div>
+        <div class="fb-share-button" data-href="<?php echo $this->serverUrl(true); ?>" data-layout="button"></div>
     </li>
     <?php endif; ?>
-    <?php if(in_array('twitter', $enabledMethods)) :?>
+    <?php if (in_array('twitter', $enabledMethods)) :?>
     <li id='sharing-twitter' class='sharing-button'>
         <a href="https://twitter.com/share" class="twitter-share-button"></a>
     </li>
     <?php endif; ?>
-    <?php if(in_array('pinterest', $enabledMethods)) :?>
+    <?php if (in_array('pinterest', $enabledMethods)) :?>
     <li id='sharing-pinterest' class='sharing-button'>
         <a data-pin-do="buttonBookmark" href="https://www.pinterest.com/pin/create/button/"></a>
     </li>
     <?php endif; ?>
-    <?php if(in_array('tumblr', $enabledMethods)) :?>
+    <?php if (in_array('tumblr', $enabledMethods)) :?>
     <li id='sharing-tumblr' class='sharing-button'>
-        <a class="tumblr-share-button" 
-           data-color="blue" 
-           href="https://embed.tumblr.com/share">
-       </a>
+        <a class="tumblr-share-button" data-color="blue" href="https://embed.tumblr.com/share"></a>
     </li>
     <?php endif; ?>
-    <?php if(in_array('email', $enabledMethods)) :?>
+    <?php if (in_array('email', $enabledMethods)) :?>
     <li id='sharing-email' class='sharing-button'>
-        <a 
-            href="mailto:?subject=<?php echo $escape($pageTitle); ?>&body=<?php echo $url; ?>">
-        <?php echo $translator->translate('Email'); ?>
-        </a>
+        <a href="mailto:?subject=<?php echo $escape($emailSubject); ?>&body=<?php echo $escape($emailBody); ?>"><?php echo $translate('Email'); ?></a>
     </li>
     <?php endif; ?>
-    <?php if(in_array('embed', $enabledMethods) ): ?>
-
+    <?php if (in_array('embed', $enabledMethods) ): ?>
     <?php
     if ($itemId) {
-        $embedUrl = $this->url('embed-item',
-                             array('controller' => 'index',
-                                   'action'     => 'embed-item',
-                                   'item-id'    => $itemId,
-                                   'site-slug'  => $siteSlug,
-                                   ),
-                             array('force_canonical' => true)
+        $embedUrl = $this->url(
+            'embed-item',
+            [
+                'controller' => 'index',
+                'action' => 'embed-item',
+                'item-id' => $itemId,
+                'site-slug' => $siteSlug,
+            ],
+            ['force_canonical' => true]
          );
     }
-
     if ($pageId) {
-        $embedUrl = $this->url('embed-page',
-                             array('controller' => 'index',
-                                   'action'     => 'embed-page',
-                                   'page-id'    => $pageId,
-                                   ),
-                             array('force_canonical' => true)
-         );
-
+        $embedUrl = $this->url(
+            'embed-page',
+            [
+                'controller' => 'index',
+                'action' => 'embed-page',
+                'page-id' => $pageId,
+            ],
+            ['force_canonical' => true]
+        );
     }
     ?>
     <li id='sharing-embed' class='sharing-button'>
-        <a data-embed-url="<?php echo $embedUrl; ?>">
-        <?php echo $translator->translate('Get embed code'); ?>
-        </a>
+        <a data-embed-url="<?php echo $embedUrl; ?>"><?php echo $translate('Get embed code'); ?></a>
     </li>
     <?php endif;?>
 </ul>
