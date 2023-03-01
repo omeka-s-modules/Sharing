@@ -87,8 +87,13 @@ class Module extends AbstractModule
                     $view = $event->getTarget();
                     $resourceUrl = $view->url(null, [], ['force_canonical' => true], true);
                     $resourceTitle = $view->resource->displayTitle();
-                    $oembed = $this->getServiceLocator()->get('Omeka\Oembed');
-                    $oembed->addHeadLink($view, $resourceUrl, $resourceTitle);
+                    $href = $view->url('oembed', [], ['force_canonical' => true, 'query' => ['url' => $resourceUrl]]);
+                    $view->headLink([
+                        'rel' => 'alternate',
+                        'type' => 'application/json+oembed',
+                        'title' => $resourceTitle,
+                        'href' => $href,
+                    ]);
                 }
             );
         }

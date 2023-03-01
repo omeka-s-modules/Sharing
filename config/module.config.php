@@ -8,6 +8,9 @@ return [
         'template_path_stack' => [
             sprintf('%s/../view', __DIR__),
         ],
+        'strategies' => [
+            'ViewJsonStrategy',
+        ],
     ],
     'translator' => [
         'translation_file_patterns' => [
