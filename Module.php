@@ -185,46 +185,41 @@ class Module extends AbstractModule
 
     public function insertOpenGraphData(Event $event)
     {
-        $routeMatch = $this->getServiceLocator()->get('Application')
-            ->getMvcEvent()->getRouteMatch();
-        $controller = $routeMatch->getParam('controller');
+        $status = $this->getServiceLocator()->get('Omeka\Status');
         $view = $event->getTarget();
-        $escape = $view->plugin('escapeHtml');
-        $description = false;
-        $image = false;
+        $controller = $status->getRouteMatch()->getParam('controller');
+
+        $view->headTitle()->setSeparator(' · ');
+        $metaProperties = [
+            'og:type' => 'website',
+            'og:title' => sprintf('%s · %s', $view->headTitle()->renderTitle(), $view->setting('installation_title', 'Omeka S')),
+            'og:description' => null,
+            'og:url' => $view->serverUrl(true),
+            'og:image' => null,
+        ];
         switch ($controller) {
             case 'Omeka\Controller\Site\Item':
-                $description = $escape($view->item->displayDescription());
-                $view->headMeta()->appendProperty('og:description', $description);
+                $metaProperties['og:description'] = $view->item->displayDescription();
                 if ($primaryMedia = $view->item->primaryMedia()) {
-                    $image = $escape($primaryMedia->thumbnailUrl('large'));
-                    $view->headMeta()->appendProperty('og:image', $image);
+                    $metaProperties['og:image'] = $primaryMedia->thumbnailUrl('large');
                 }
             break;
             case 'Omeka\Controller\Site\Page':
-                $blocks = $view->page->blocks();
-                foreach ($blocks as $block) {
-                    $attachments = $block->attachments();
-                    foreach ($attachments as $attachment) {
+                foreach ($view->page->blocks() as $block) {
+                    foreach ($block->attachments() as $attachment) {
                         $item = $attachment->item();
                         if ($item && ($primaryMedia = $item->primaryMedia())) {
-                            $image = $escape($primaryMedia->thumbnailUrl('large'));
+                            $metaProperties['og:image'] = $primaryMedia->thumbnailUrl('large');
                             break 2;
                         }
                     }
                 }
             break;
         }
-        $view->headTitle()->setSeparator(' · ');
-        $pageTitle = $view->headTitle()->renderTitle() . ' · ' . $view->setting('installation_title', 'Omeka S');
-        $view->headMeta()->appendProperty('og:title', $pageTitle);
-        $view->headMeta()->appendProperty('og:type', 'website');
-        $view->headMeta()->appendProperty('og:url', $view->serverUrl(true));
-        if ($description) {
-            $view->headMeta()->appendProperty('og:description', $description);
-        }
-        if ($image) {
-            $view->headMeta()->appendProperty('og:image', $image);
+        foreach ($metaProperties as $metaProperty => $metaContent) {
+            if (null !== $metaContent) {
+                $view->headMeta()->appendProperty($metaProperty, $metaContent);
+            }
         }
     }
 
