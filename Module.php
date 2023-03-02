@@ -64,6 +64,7 @@ class Module extends AbstractModule
         // Add Open Graph head meta to public pages.
         $resources = [
             'Omeka\Controller\Site\Item',
+            'Omeka\Controller\Site\Media',
             'Omeka\Controller\Site\Index',
             'Omeka\Controller\Site\Page',
         ];
@@ -255,8 +256,9 @@ class Module extends AbstractModule
         ];
         switch ($controller) {
             case 'Omeka\Controller\Site\Item':
-                $metaProperties['og:description'] = $view->item->displayDescription();
-                if ($primaryMedia = $view->item->primaryMedia()) {
+            case 'Omeka\Controller\Site\Media':
+                $metaProperties['og:description'] = $view->resource->displayDescription();
+                if ($primaryMedia = $view->resource->primaryMedia()) {
                     $metaProperties['og:image'] = $primaryMedia->thumbnailUrl('large');
                 }
             break;
@@ -273,7 +275,7 @@ class Module extends AbstractModule
             break;
         }
         foreach ($metaProperties as $metaProperty => $metaContent) {
-            if (null !== $metaContent) {
+            if ($metaContent) {
                 $view->headMeta()->appendProperty($metaProperty, $metaContent);
             }
         }
