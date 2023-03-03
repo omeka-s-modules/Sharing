@@ -47,6 +47,7 @@ class Module extends AbstractModule
         // Add sharing methods to public pages.
         $resources = [
             'Omeka\Controller\Site\Item',
+            'Omeka\Controller\Site\Media',
             'Omeka\Controller\Site\Page',
         ];
         foreach ($resources as $resource) {
@@ -197,6 +198,7 @@ class Module extends AbstractModule
             echo $view->partial('share-buttons', [
                 'enabledMethods' => $enabledMethods,
                 'itemId' => isset($view->item) ? $view->item->id() : false,
+                'mediaId' => isset($view->media) ? $view->media->id() : false,
                 'pageId' => isset($view->page) ? $view->page->id() : false,
                 'siteSlug' => $siteSlug,
             ]);

@@ -46,6 +46,18 @@ $emailBody = $this->serverUrl(true);
             ['force_canonical' => true]
          );
     }
+    if ($mediaId) {
+        $embedUrl = $this->url(
+            'embed-media',
+            [
+                'controller' => 'index',
+                'action' => 'embed-media',
+                'media-id' => $mediaId,
+                'site-slug' => $siteSlug,
+            ],
+            ['force_canonical' => true]
+         );
+    }
     if ($pageId) {
         $embedUrl = $this->url(
             'embed-page',
