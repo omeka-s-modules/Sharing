@@ -41,6 +41,17 @@ return [
                     ],
                 ],
             ],
+            'embed-media' => [
+                'type' => Http\Segment::class,
+                'options' => [
+                    'route' => '/embed-media/:site-slug/:media-id',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Sharing\Controller',
+                        'controller' => 'Index',
+                        'action' => 'embedMedia',
+                    ],
+                ],
+            ],
             'embed-page' => [
                 'type' => Http\Segment::class,
                 'options' => [

@@ -1,0 +1,35 @@
+<?php
+$escape = $this->plugin('escapeHtml');
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    img {
+        float: left;
+        margin: 3px;
+    }
+    div#text {
+        float: right;
+        width: 240px;
+    }
+    div#text h1 {
+        margin-top: 0px;
+    }
+    </style>
+</head>
+<body>
+    <div style="width: 450px">
+        <div id='text'>
+            <h1><a href='<?php echo $media->siteUrl($siteSlug, true); ?>'><?php echo $media->displayTitle(); ?></a></h1>
+            <p><?php echo $media->displayDescription();?></p>
+        </div>
+        <?php
+        if ($primaryMedia = $media->primaryMedia()) {
+            $image = $escape($primaryMedia->thumbnailUrl('square'));
+            echo "<img src='$image'></img>";
+        }
+        ?>
+    </div>
+</body>
+</html>

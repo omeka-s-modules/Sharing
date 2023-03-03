@@ -22,6 +22,21 @@ class IndexController extends AbstractActionController
         return $view;
     }
 
+    public function embedMediaAction()
+    {
+        $mediaId = $this->params('media-id');
+        $siteSlug = $this->params('site-slug');
+        $response = $this->api()->read('media', $mediaId);
+        $media = $response->getContent();
+
+        $view = new ViewModel();
+        $view->setTerminal(true);
+        $view->setVariable('media', $media);
+        $view->setVariable('siteSlug', $siteSlug);
+
+        return $view;
+    }
+
     public function embedPageAction()
     {
         $pageId = $this->params('page-id');

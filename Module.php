@@ -7,6 +7,7 @@ use Laminas\EventManager\Event;
 use Laminas\EventManager\SharedEventManagerInterface;
 use Laminas\Mvc\MvcEvent;
 use Laminas\ServiceManager\ServiceLocatorInterface;
+use Laminas\View\Renderer\PhpRenderer;
 
 class Module extends AbstractModule
 {
@@ -80,6 +81,7 @@ class Module extends AbstractModule
         $resources = [
             'Omeka\Controller\Site\Item',
             'Omeka\Controller\Site\Media',
+            'Omeka\Controller\Site\Page',
         ];
         foreach ($resources as $resource) {
             $sharedEventManager->attach(
@@ -246,10 +248,9 @@ class Module extends AbstractModule
         $view = $event->getTarget();
         $controller = $status->getRouteMatch()->getParam('controller');
 
-        $view->headTitle()->setSeparator(' · ');
         $metaProperties = [
             'og:type' => 'website',
-            'og:title' => sprintf('%s · %s', $view->headTitle()->renderTitle(), $view->setting('installation_title', 'Omeka S')),
+            'og:title' => $this->getTitle($view),
             'og:description' => null,
             'og:url' => $view->serverUrl(true),
             'og:image' => null,
@@ -261,7 +262,7 @@ class Module extends AbstractModule
                 if ($primaryMedia = $view->resource->primaryMedia()) {
                     $metaProperties['og:image'] = $primaryMedia->thumbnailUrl('large');
                 }
-            break;
+                break;
             case 'Omeka\Controller\Site\Page':
                 foreach ($view->page->blocks() as $block) {
                     foreach ($block->attachments() as $attachment) {
@@ -272,7 +273,7 @@ class Module extends AbstractModule
                         }
                     }
                 }
-            break;
+                break;
         }
         foreach ($metaProperties as $metaProperty => $metaContent) {
             if ($metaContent) {
@@ -289,15 +290,32 @@ class Module extends AbstractModule
      */
     public function addOembedHeadLink(Event $event)
     {
+        $status = $this->getServiceLocator()->get('Omeka\Status');
         $view = $event->getTarget();
-        $resourceUrl = $view->url(null, [], ['force_canonical' => true], true);
-        $resourceTitle = $view->resource->displayTitle();
-        $href = $view->url('oembed', [], ['force_canonical' => true, 'query' => ['url' => $resourceUrl]]);
+        $controller = $status->getRouteMatch()->getParam('controller');
+
+        $href = $view->url('oembed', [], ['force_canonical' => true, 'query' => ['url' => $view->serverUrl(true)]]);
         $view->headLink([
             'rel' => 'alternate',
             'type' => 'application/json+oembed',
-            'title' => $resourceTitle,
+            'title' => $this->getTitle($view),
             'href' => $href,
         ]);
+    }
+
+    /**
+     * Get the title of the current page.
+     *
+     * @param PhpRenderer $view
+     * @return string
+     */
+    public function getTitle(PhpRenderer $view)
+    {
+        $view->headTitle()->setSeparator(' · ');
+        return sprintf(
+            '%s · %s',
+            $view->headTitle()->renderTitle(),
+            $view->site->title(),
+        );
     }
 }
