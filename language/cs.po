@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Jiří Vírava <appukonrad@gmail.com>, 2018
+# Appukonrad <appukonrad@gmail.com>, 2018
 # Martin Slavík <martin.d.slavik@gmail.com>, 2022
 # 
 #, fuzzy
@@ -12,21 +12,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-08 12:12-0500\n"
+"POT-Creation-Date: 2023-04-26 15:04-0400\n"
 "PO-Revision-Date: 2017-09-14 19:41+0000\n"
 "Last-Translator: Martin Slavík <martin.d.slavik@gmail.com>, 2022\n"
-"Language-Team: Czech (https://www.transifex.com/omeka/teams/14184/cs/)\n"
+"Language-Team: Czech (https://app.transifex.com/omeka/teams/14184/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
 "Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
-#: view/share-buttons.phtml:69
+#: view/share-buttons.phtml:74
 msgid "Get embed code"
 msgstr "Získat kód pro vložení"
 
-#: Module.php:29
+#: Module.php:30
 msgid ""
 "Sharing options are site-specific. Site owners will need to set the options "
 "for their sites."
@@ -34,42 +34,42 @@ msgstr ""
 "Možnosti sdílení jsou specifické pro daný web. Vlastníci webu budou muset "
 "tyto možnosti nastavit."
 
-#: Module.php:99
+#: Module.php:102
 msgid "Sharing"
 msgstr "Sdílení"
 
-#: Module.php:107
+#: Module.php:112
 msgid "Enable Sharing module for these methods"
 msgstr "Povolit modul sdílení pro tyto metody"
 
-#: Module.php:110
+#: Module.php:115
 msgid "Facebook"
 msgstr "Facebook"
 
-#: Module.php:115
+#: Module.php:120
 msgid "Twitter"
 msgstr "Twitter"
 
-#: Module.php:120
+#: Module.php:125
 msgid "Tumblr"
 msgstr "Tumblr"
 
-#: Module.php:125
+#: Module.php:130
 msgid "Pinterest"
 msgstr "Pinterest"
 
-#: Module.php:135
+#: Module.php:140
 msgid "Embed codes"
 msgstr "Vložit kódy"
 
-#: Module.php:150
+#: Module.php:156
 msgid "Sharing buttons placement on the page"
 msgstr "Umístění tlačítka Sdílení na stránce"
 
-#: Module.php:153
+#: Module.php:159
 msgid "Top"
 msgstr "Nahoře"
 
-#: Module.php:158
+#: Module.php:163
 msgid "Bottom"
 msgstr "Dole"

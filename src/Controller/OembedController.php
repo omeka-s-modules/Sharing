@@ -57,7 +57,7 @@ class OembedController extends AbstractActionController
                 $oembed['thumbnail_width'] = 200;
                 $oembed['thumbnail_height'] = 200;
             }
-        // Handle a public media page.
+            // Handle a public media page.
         } elseif ($isMediaMatch) {
             [$path, $siteSlug, $mediaId] = $mediaMatches;
             try {
@@ -75,7 +75,7 @@ class OembedController extends AbstractActionController
                 $oembed['thumbnail_width'] = 200;
                 $oembed['thumbnail_height'] = 200;
             }
-        // Handle a public site page.
+            // Handle a public site page.
         } elseif ($isPageMatch) {
             [$path, $siteSlug, $pageSlug] = $pageMatches;
             try {
@@ -89,7 +89,7 @@ class OembedController extends AbstractActionController
             $embedUrl = $this->url()->fromRoute('embed-page', ['page-id' => $sitePage->id()], ['force_canonical' => true]);
             $oembed['html'] = sprintf('<iframe src="%s"></iframe>', $escapeHtml($embedUrl));
             foreach ($sitePage->blocks() as $block) {
-                foreach($block->attachments() as $attachment) {
+                foreach ($block->attachments() as $attachment) {
                     $item = $attachment->item();
                     if ($primaryMedia = $resource->primaryMedia()) {
                         $oembed['thumbnail_url'] = $primaryMedia->thumbnailUrl('square');

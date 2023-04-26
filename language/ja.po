@@ -11,62 +11,62 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-08 12:12-0500\n"
+"POT-Creation-Date: 2023-04-26 15:04-0400\n"
 "PO-Revision-Date: 2017-09-14 19:41+0000\n"
 "Last-Translator: Naosuke Okamoto, 2018\n"
-"Language-Team: Japanese (https://www.transifex.com/omeka/teams/14184/ja/)\n"
+"Language-Team: Japanese (https://app.transifex.com/omeka/teams/14184/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: view/share-buttons.phtml:69
+#: view/share-buttons.phtml:74
 msgid "Get embed code"
 msgstr "埋め込みコードを取得"
 
-#: Module.php:29
+#: Module.php:30
 msgid ""
 "Sharing options are site-specific. Site owners will need to set the options "
 "for their sites."
 msgstr "共有オプションはサイト固有です。 サイト所有者はサイトのオプションを設定する必要があります。"
 
-#: Module.php:99
+#: Module.php:102
 msgid "Sharing"
 msgstr "共有"
 
-#: Module.php:107
+#: Module.php:112
 msgid "Enable Sharing module for these methods"
 msgstr "これらのメソッドの共有モジュールを有効にする"
 
-#: Module.php:110
+#: Module.php:115
 msgid "Facebook"
 msgstr "Facebook"
 
-#: Module.php:115
+#: Module.php:120
 msgid "Twitter"
 msgstr "Twitter"
 
-#: Module.php:120
+#: Module.php:125
 msgid "Tumblr"
 msgstr "Tumblr"
 
-#: Module.php:125
+#: Module.php:130
 msgid "Pinterest"
 msgstr "Pinterest"
 
-#: Module.php:135
+#: Module.php:140
 msgid "Embed codes"
 msgstr "埋め込みコード"
 
-#: Module.php:150
+#: Module.php:156
 msgid "Sharing buttons placement on the page"
 msgstr "ページ上のボタンの配置を共有する"
 
-#: Module.php:153
+#: Module.php:159
 msgid "Top"
 msgstr "先頭"
 
-#: Module.php:158
+#: Module.php:163
 msgid "Bottom"
 msgstr "末尾"

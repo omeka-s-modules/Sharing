@@ -4,7 +4,7 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# irfan pradana <gondeaz@gmail.com>, 2018
+# Iametza Interaktiboa, 2022
 # 
 #, fuzzy
 msgid ""
@@ -13,62 +13,62 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-26 15:04-0400\n"
 "PO-Revision-Date: 2017-09-14 19:41+0000\n"
-"Last-Translator: irfan pradana <gondeaz@gmail.com>, 2018\n"
-"Language-Team: Indonesian (https://app.transifex.com/omeka/teams/14184/id/)\n"
+"Last-Translator: Iametza Interaktiboa, 2022\n"
+"Language-Team: Basque (https://app.transifex.com/omeka/teams/14184/eu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: id\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: eu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: view/share-buttons.phtml:74
 msgid "Get embed code"
-msgstr "dapatkan embed code"
+msgstr "Lortu kapsulatzeko kodea"
 
 #: Module.php:30
 msgid ""
 "Sharing options are site-specific. Site owners will need to set the options "
 "for their sites."
 msgstr ""
-"Pilihan untuk membagi data adalah spesifik pada situs tertentu. Pemilik "
-"situs harus mengatur situsnya"
+"Partekatze aukerak atari bakoitzerako zehazten dira. Atari jabeek beraien "
+"atarirako aukerak zehaztu behar dituzte."
 
 #: Module.php:102
 msgid "Sharing"
-msgstr ""
+msgstr "Partekatzea"
 
 #: Module.php:112
 msgid "Enable Sharing module for these methods"
-msgstr ""
+msgstr "Gaitu Partekatze modulua metodo hauentzat"
 
 #: Module.php:115
 msgid "Facebook"
-msgstr ""
+msgstr "Facebook"
 
 #: Module.php:120
 msgid "Twitter"
-msgstr ""
+msgstr "Twitter"
 
 #: Module.php:125
 msgid "Tumblr"
-msgstr ""
+msgstr "Tumblr"
 
 #: Module.php:130
 msgid "Pinterest"
-msgstr ""
+msgstr "Pinterest"
 
 #: Module.php:140
 msgid "Embed codes"
-msgstr ""
+msgstr "Kapsulatu kodea"
 
 #: Module.php:156
 msgid "Sharing buttons placement on the page"
-msgstr ""
+msgstr "Partekatzeko botoien kokalekua orrialdean"
 
 #: Module.php:159
 msgid "Top"
-msgstr ""
+msgstr "Goia"
 
 #: Module.php:163
 msgid "Bottom"
-msgstr ""
+msgstr "Oina"
