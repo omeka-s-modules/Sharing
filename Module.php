@@ -252,10 +252,9 @@ class Module extends AbstractModule
 
         $metaProperties = [
             'og:type' => 'website',
-            'og:title' => $this->getTitle($view),
-            'og:description' => null,
+            'og:site_name' => $view->site->title(),
+            'og:title' => $view->headTitle()->renderTitle(),
             'og:url' => $view->serverUrl(true),
-            'og:image' => null,
         ];
         switch ($controller) {
             case 'Omeka\Controller\Site\Item':
@@ -263,6 +262,15 @@ class Module extends AbstractModule
                 $metaProperties['og:description'] = $view->resource->displayDescription();
                 if ($primaryMedia = $view->resource->primaryMedia()) {
                     $metaProperties['og:image'] = $primaryMedia->thumbnailUrl('large');
+                    $mediaType = strstr($primaryMedia->mediaType(), '/', true);
+                    switch ($mediaType) {
+                        case 'audio':
+                            $metaProperties['og:audio'] = $primaryMedia->originalUrl();
+                            break;
+                        case 'video':
+                            $metaProperties['og:video'] = $primaryMedia->originalUrl();
+                            break;
+                    }
                 }
                 break;
             case 'Omeka\Controller\Site\Page':
@@ -300,24 +308,8 @@ class Module extends AbstractModule
         $view->headLink([
             'rel' => 'alternate',
             'type' => 'application/json+oembed',
-            'title' => $this->getTitle($view),
+            'title' => $view->headTitle()->renderTitle(),
             'href' => $href,
         ]);
-    }
-
-    /**
-     * Get the title of the current page.
-     *
-     * @param PhpRenderer $view
-     * @return string
-     */
-    public function getTitle(PhpRenderer $view)
-    {
-        $view->headTitle()->setSeparator(' · ');
-        return sprintf(
-            '%s · %s',
-            $view->headTitle()->renderTitle(),
-            $view->site->title(),
-        );
     }
 }
