@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-26 15:04-0400\n"
+"POT-Creation-Date: 2023-05-04 13:51-0400\n"
 "PO-Revision-Date: 2017-09-14 19:41+0000\n"
 "Last-Translator: Deidson Rafael Trindade <drafael@usp.br>, 2020\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/omeka/teams/14184/pt_BR/)\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Get embed code"
 msgstr "Obter código de incorporação"
 
-#: Module.php:30
+#: Module.php:29
 msgid ""
 "Sharing options are site-specific. Site owners will need to set the options "
 "for their sites."
@@ -33,42 +33,42 @@ msgstr ""
 "As opções de compartilhamento são específicas do site. Os proprietários do "
 "site precisarão definir as opções para seus sites."
 
-#: Module.php:102
+#: Module.php:101
 msgid "Sharing"
 msgstr "Compartilhar"
 
-#: Module.php:112
+#: Module.php:111
 msgid "Enable Sharing module for these methods"
 msgstr "Ative o módulo de compartilhamento para esses métodos"
 
-#: Module.php:115
+#: Module.php:114
 msgid "Facebook"
 msgstr "Facebook"
 
-#: Module.php:120
+#: Module.php:119
 msgid "Twitter"
 msgstr "Twitter"
 
-#: Module.php:125
+#: Module.php:124
 msgid "Tumblr"
 msgstr "Tumblr"
 
-#: Module.php:130
+#: Module.php:129
 msgid "Pinterest"
 msgstr "Pinterest"
 
-#: Module.php:140
+#: Module.php:139
 msgid "Embed codes"
 msgstr "Códigos incorporados"
 
-#: Module.php:156
+#: Module.php:155
 msgid "Sharing buttons placement on the page"
 msgstr "Posicionamento dos botões de compartilhamento na página"
 
-#: Module.php:159
+#: Module.php:158
 msgid "Top"
 msgstr "Topo"
 
-#: Module.php:163
+#: Module.php:162
 msgid "Bottom"
 msgstr "Inferior"

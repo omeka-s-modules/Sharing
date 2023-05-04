@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-26 15:04-0400\n"
+"POT-Creation-Date: 2023-05-04 13:51-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,48 +21,48 @@ msgstr ""
 msgid "Get embed code"
 msgstr ""
 
-#: Module.php:30
+#: Module.php:29
 msgid ""
 "Sharing options are site-specific. Site owners will need to set the options "
 "for their sites."
 msgstr ""
 
-#: Module.php:102
+#: Module.php:101
 msgid "Sharing"
 msgstr ""
 
-#: Module.php:112
+#: Module.php:111
 msgid "Enable Sharing module for these methods"
 msgstr ""
 
-#: Module.php:115
+#: Module.php:114
 msgid "Facebook"
 msgstr ""
 
-#: Module.php:120
+#: Module.php:119
 msgid "Twitter"
 msgstr ""
 
-#: Module.php:125
+#: Module.php:124
 msgid "Tumblr"
 msgstr ""
 
-#: Module.php:130
+#: Module.php:129
 msgid "Pinterest"
 msgstr ""
 
-#: Module.php:140
+#: Module.php:139
 msgid "Embed codes"
 msgstr ""
 
-#: Module.php:156
+#: Module.php:155
 msgid "Sharing buttons placement on the page"
 msgstr ""
 
-#: Module.php:159
+#: Module.php:158
 msgid "Top"
 msgstr ""
 
-#: Module.php:163
+#: Module.php:162
 msgid "Bottom"
 msgstr ""

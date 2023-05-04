@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-26 15:04-0400\n"
+"POT-Creation-Date: 2023-05-04 13:51-0400\n"
 "PO-Revision-Date: 2017-09-14 19:41+0000\n"
 "Last-Translator: Hong Zhang <zhangh@unlv.nevada.edu>, 2018\n"
 "Language-Team: Chinese (China) (https://app.transifex.com/omeka/teams/14184/zh_CN/)\n"
@@ -25,48 +25,48 @@ msgstr ""
 msgid "Get embed code"
 msgstr "获取内嵌代码"
 
-#: Module.php:30
+#: Module.php:29
 msgid ""
 "Sharing options are site-specific. Site owners will need to set the options "
 "for their sites."
 msgstr "共享选项是特定于网站的。网站所有人需要给他们的站点设置选项。"
 
-#: Module.php:102
+#: Module.php:101
 msgid "Sharing"
 msgstr "共享"
 
-#: Module.php:112
+#: Module.php:111
 msgid "Enable Sharing module for these methods"
 msgstr "给这些方法启用共享模块"
 
-#: Module.php:115
+#: Module.php:114
 msgid "Facebook"
 msgstr "脸书"
 
-#: Module.php:120
+#: Module.php:119
 msgid "Twitter"
 msgstr "推特"
 
-#: Module.php:125
+#: Module.php:124
 msgid "Tumblr"
 msgstr "汤不拉"
 
-#: Module.php:130
+#: Module.php:129
 msgid "Pinterest"
 msgstr "拼趣"
 
-#: Module.php:140
+#: Module.php:139
 msgid "Embed codes"
 msgstr "内嵌代码"
 
-#: Module.php:156
+#: Module.php:155
 msgid "Sharing buttons placement on the page"
 msgstr "在页面上的共享按钮的定位"
 
-#: Module.php:159
+#: Module.php:158
 msgid "Top"
 msgstr "顶部"
 
-#: Module.php:163
+#: Module.php:162
 msgid "Bottom"
 msgstr "底部"
