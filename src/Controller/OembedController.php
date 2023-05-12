@@ -91,7 +91,7 @@ class OembedController extends AbstractActionController
             foreach ($sitePage->blocks() as $block) {
                 foreach ($block->attachments() as $attachment) {
                     $item = $attachment->item();
-                    if ($primaryMedia = $resource->primaryMedia()) {
+                    if ($primaryMedia = $item->primaryMedia()) {
                         $oembed['thumbnail_url'] = $primaryMedia->thumbnailUrl('square');
                         $oembed['thumbnail_width'] = 200;
                         $oembed['thumbnail_height'] = 200;
