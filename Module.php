@@ -261,8 +261,12 @@ class Module extends AbstractModule
                 $metaProperties['og:description'] = $view->resource->displayDescription();
                 if ($primaryMedia = $view->resource->primaryMedia()) {
                     $metaProperties['og:image'] = $primaryMedia->thumbnailUrl('large');
-                    $mediaType = strstr($primaryMedia->mediaType(), '/', true);
-                    switch ($mediaType) {
+                    $mediaType = $primaryMedia->mediaType();
+                    if ($mediaType === null) {
+                        break;
+                    }
+                    $mediaMainType = strstr($mediaType, '/', true);
+                    switch ($mediaMainType) {
                         case 'audio':
                             $metaProperties['og:audio'] = $primaryMedia->originalUrl();
                             break;
