@@ -17,6 +17,11 @@ return [
             'sharing' => View\Helper\Sharing::class,
         ],
     ],
+    'block_layouts' => [
+        'invokables' => [
+            'selection' => Site\BlockLayout\Sharing::class,
+        ],
+    ],
     'resource_page_block_layouts' => [
         'invokables' => [
             'sharing' => Site\ResourcePageBlockLayout\Sharing::class,
