@@ -29,15 +29,44 @@ class Sharing extends AbstractHelper
 
         $assetUrl = $plugins->get('assetUrl');
         $currentSite = $plugins->get('currentSite');
+        $headScript = $plugins->get('headScript');
         $siteSlug = $currentSite()->slug();
 
-        if (in_array('twitter', $enabledMethods)) {
-            $view->headScript()->appendFile('https://platform.twitter.com/widgets.js');
+        if (in_array('fb', $enabledMethods)) {
+            $script = <<<'JS'
+            window.fbAsyncInit = function() {
+                FB.init({
+                    xfbml      : true,
+                    version    : 'v2.5'
+                });
+            };
+            (function(d, s, id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {return;}
+                js = d.createElement(s); js.id = id;
+                js.src = '//connect.facebook.net/en_US/sdk.js';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+            JS;
+            $headScript->appendScript($script);
         }
-        $view->headScript()->appendFile($assetUrl('js/sharing.js', 'Sharing'));
+
+        if (in_array('twitter', $enabledMethods)) {
+            $headScript->appendFile('https://platform.twitter.com/widgets.js');
+        }
+
+        if (in_array('tumblr', $enabledMethods)) {
+            $headScript->appendFile('https://assets.tumblr.com/share-button.js', 'text/javascript', ['id' => 'tumblr-js', 'defer' => 'defer', 'async' => 'async']);
+        }
+
+        if (in_array('pinterest', $enabledMethods)) {
+            $headScript->appendFile('https://assets.pinterest.com/js/pinit.js', 'text/javascript', ['id' => 'pinterest', 'defer' => 'defer', 'async' => 'async']);
+        }
+
+        $headScript->appendFile($assetUrl('js/sharing.js', 'Sharing'), 'text/javascript', ['defer' => 'defer', 'async' => 'async']);
         $view->headLink()->appendStylesheet($assetUrl('css/sharing.css', 'Sharing'));
 
-        $html = $view->partial(self::PARTIAL_NAME, [
+        return $view->partial(self::PARTIAL_NAME, [
             'enabledMethods' => $enabledMethods,
             'itemId' => isset($view->item) ? $view->item->id() : false,
             'mediaId' => isset($view->media) ? $view->media->id() : false,
@@ -45,44 +74,5 @@ class Sharing extends AbstractHelper
             'siteSlug' => $siteSlug,
             'displayAsButton' => (bool) $siteSetting('sharing_display_as_button'),
         ]);
-
-        $fbJavascript = "
-            <script>
-              window.fbAsyncInit = function() {
-                FB.init({
-                  xfbml      : true,
-                  version    : 'v2.5'
-                });
-              };
-              (function(d, s, id){
-                 var js, fjs = d.getElementsByTagName(s)[0];
-                 if (d.getElementById(id)) {return;}
-                 js = d.createElement(s); js.id = id;
-                 js.src = '//connect.facebook.net/en_US/sdk.js';
-                 fjs.parentNode.insertBefore(js, fjs);
-               }(document, 'script', 'facebook-jssdk'));
-            </script>
-            ";
-
-        $pinterestJavascript = '
-                <script
-                    type="text/javascript"
-                    async defer
-                    src="//assets.pinterest.com/js/pinit.js"
-                ></script>
-            ';
-
-        $tumblrJavascript = '
-                <script id="tumblr-js" async src="https://assets.tumblr.com/share-button.js"></script>
-            ';
-
-        foreach ($enabledMethods as $method) {
-            $js = $method . 'Javascript';
-            if (isset($$js)) {
-                $html .= $$js;
-            }
-        }
-
-        return $html;
     }
 }

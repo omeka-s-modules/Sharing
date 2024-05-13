@@ -287,9 +287,7 @@ class Module extends AbstractModule
      */
     public function addOembedHeadLink(Event $event)
     {
-        $status = $this->getServiceLocator()->get('Omeka\Status');
         $view = $event->getTarget();
-        $controller = $status->getRouteMatch()->getParam('controller');
 
         $href = $view->url('oembed', [], ['force_canonical' => true, 'query' => ['url' => $view->serverUrl(true)]]);
         $view->headLink([
