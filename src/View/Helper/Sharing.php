@@ -7,6 +7,11 @@ use Laminas\View\Helper\AbstractHelper;
 class Sharing extends AbstractHelper
 {
     /**
+     * The default partial view script.
+     */
+    const PARTIAL_NAME = 'common/share-buttons';
+
+    /**
      * Show sharing buttons of the current resource according to site settings.
      *
      * The current resources is an item, a media or a page.
@@ -32,7 +37,7 @@ class Sharing extends AbstractHelper
         $view->headScript()->appendFile($assetUrl('js/sharing.js', 'Sharing'));
         $view->headLink()->appendStylesheet($assetUrl('css/sharing.css', 'Sharing'));
 
-        $html = $view->partial('share-buttons', [
+        $html = $view->partial(self::PARTIAL_NAME, [
             'enabledMethods' => $enabledMethods,
             'itemId' => isset($view->item) ? $view->item->id() : false,
             'mediaId' => isset($view->media) ? $view->media->id() : false,
