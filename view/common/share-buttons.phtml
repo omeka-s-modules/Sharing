@@ -6,6 +6,11 @@ $emailSubject = sprintf('%s · %s', $this->headTitle()->renderTitle(), $this->se
 $emailBody = $this->serverUrl(true);
 ?>
 
+<?php if ($displayAsButton): ?>
+<details class="sharing-details">
+<summary class="button"><span class="fas fa-share-alt"></span></summary>
+<?php endif; ?>
+
 <ul id='sharing-buttons'>
     <?php if (in_array('fb', $enabledMethods)) :?>
     <li id='sharing-fb' class='sharing-button'>
@@ -75,3 +80,7 @@ $emailBody = $this->serverUrl(true);
     </li>
     <?php endif;?>
 </ul>
+
+<?php if ($displayAsButton): ?>
+</details>
+<?php endif; ?>

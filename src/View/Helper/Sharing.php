@@ -43,6 +43,7 @@ class Sharing extends AbstractHelper
             'mediaId' => isset($view->media) ? $view->media->id() : false,
             'pageId' => isset($view->page) ? $view->page->id() : false,
             'siteSlug' => $siteSlug,
+            'displayAsButton' => (bool) $siteSetting('sharing_display_as_button'),
         ]);
 
         $fbJavascript = "

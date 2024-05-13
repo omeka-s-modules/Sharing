@@ -103,6 +103,8 @@ class Module extends AbstractModule
 
         $enabledMethods = $siteSettings->get('sharing_methods', []);
         $placement = $siteSettings->get('sharing_placement', 'view.show.before');
+        $display = (int) $siteSettings->get('sharing_display_as_button', 0);
+
         $form->add([
             'name' => 'sharing_methods',
             'type' => 'multiCheckbox',
@@ -175,6 +177,20 @@ class Module extends AbstractModule
             'attributes' => [
                 'required' => false,
                 'value' => $placement,
+            ],
+        ]);
+
+        $form->add([
+            'name' => 'sharing_display_as_button',
+            'type' => 'checkbox',
+            'options' => [
+                'element_group' => 'sharing',
+                'label' => "Display sharing buttons as a single button", // @translate
+            ],
+            'attributes' => [
+                'id' => 'sharing_display_as_button',
+                'required' => false,
+                'value' => $display,
             ],
         ]);
     }
