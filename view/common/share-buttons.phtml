@@ -1,6 +1,7 @@
 <?php
 $this->headTitle()->setSeparator(' · ');
 $escape = $this->plugin('escapeHtml');
+$escapeAttr = $this->plugin('escapeHtmlAttr');
 $translate = $this->plugin('translate');
 $emailSubject = sprintf('%s · %s', $this->headTitle()->renderTitle(), $this->setting('installation_title', 'Omeka S'));
 $emailBody = $this->serverUrl(true);
@@ -34,7 +35,7 @@ $emailBody = $this->serverUrl(true);
     <?php endif; ?>
     <?php if (in_array('email', $enabledMethods)) :?>
     <li id='sharing-email' class='sharing-button'>
-        <a href="mailto:?subject=<?php echo $escape($emailSubject); ?>&body=<?php echo $escape($emailBody); ?>"><?php echo $translate('Email'); ?></a>
+        <a href="mailto:?subject=<?php echo $escapeAttr($emailSubject); ?>&body=<?php echo $escapeAttr($emailBody); ?>"><?php echo $escape($translate('Email')); ?></a>
     </li>
     <?php endif; ?>
     <?php if (in_array('embed', $enabledMethods) ): ?>
