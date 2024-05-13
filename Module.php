@@ -187,53 +187,10 @@ class Module extends AbstractModule
         $enabledMethods = $siteSettings->get('sharing_methods');
         $placement = $siteSettings->get('sharing_placement', 'view.show.before');
         $eventName = $event->getName();
-        if (!empty($enabledMethods) && ($eventName == $placement)) {
+        if (count($enabledMethods) && $eventName === $placement) {
+            /** @see \Sharing\View\Helper\Sharing */
             $view = $event->getTarget();
-            $view->headScript()->appendFile('https://platform.twitter.com/widgets.js');
-            $view->headScript()->appendFile($view->assetUrl('js/sharing.js', 'Sharing'));
-            $view->headLink()->appendStylesheet($view->assetUrl('css/sharing.css', 'Sharing'));
-            $siteSlug = $this->getServiceLocator()->get('Application')
-                ->getMvcEvent()->getRouteMatch()->getParam('site-slug');
-            echo $view->partial('share-buttons', [
-                'enabledMethods' => $enabledMethods,
-                'itemId' => isset($view->item) ? $view->item->id() : false,
-                'mediaId' => isset($view->media) ? $view->media->id() : false,
-                'pageId' => isset($view->page) ? $view->page->id() : false,
-                'siteSlug' => $siteSlug,
-            ]);
-            $fbJavascript = "
-            <script>
-              window.fbAsyncInit = function() {
-                FB.init({
-                  xfbml      : true,
-                  version    : 'v2.5'
-                });
-              };
-              (function(d, s, id){
-                 var js, fjs = d.getElementsByTagName(s)[0];
-                 if (d.getElementById(id)) {return;}
-                 js = d.createElement(s); js.id = id;
-                 js.src = '//connect.facebook.net/en_US/sdk.js';
-                 fjs.parentNode.insertBefore(js, fjs);
-               }(document, 'script', 'facebook-jssdk'));
-            </script>
-            ";
-            $pinterestJavascript = '
-                <script
-                    type="text/javascript"
-                    async defer
-                    src="//assets.pinterest.com/js/pinit.js"
-                ></script>
-            ';
-            $tumblrJavascript = '
-                <script id="tumblr-js" async src="https://assets.tumblr.com/share-button.js"></script>
-            ';
-            foreach ($enabledMethods as $method) {
-                $js = $method . 'Javascript';
-                if (isset($$js)) {
-                    echo $$js;
-                }
-            }
+            echo $view->sharing();
         }
     }
 

@@ -12,6 +12,11 @@ return [
             'ViewJsonStrategy',
         ],
     ],
+    'view_helpers' => [
+        'invokables' => [
+            'sharing' => View\Helper\Sharing::class,
+        ],
+    ],
     'translator' => [
         'translation_file_patterns' => [
             [
