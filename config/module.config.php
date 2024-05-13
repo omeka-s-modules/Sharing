@@ -17,14 +17,9 @@ return [
             'sharing' => View\Helper\Sharing::class,
         ],
     ],
-    'translator' => [
-        'translation_file_patterns' => [
-            [
-                'type' => 'gettext',
-                'base_dir' => sprintf('%s/../language', __DIR__),
-                'pattern' => '%s.mo',
-                'text_domain' => null,
-            ],
+    'resource_page_block_layouts' => [
+        'invokables' => [
+            'sharing' => Site\ResourcePageBlockLayout\Sharing::class,
         ],
     ],
     'controllers' => [
@@ -77,6 +72,16 @@ return [
                         'action' => 'index',
                     ],
                 ],
+            ],
+        ],
+    ],
+    'translator' => [
+        'translation_file_patterns' => [
+            [
+                'type' => 'gettext',
+                'base_dir' => sprintf('%s/../language', __DIR__),
+                'pattern' => '%s.mo',
+                'text_domain' => null,
             ],
         ],
     ],
