@@ -162,6 +162,10 @@ class Module extends AbstractModule
                         'label' => 'Bottom', //@translate
                         'value' => 'view.show.after',
                     ],
+                    'block' => [
+                        'label' => 'Page block and resource block', // @translate
+                        'value' => 'block',
+                    ],
                     'none' => [
                         'label' => 'None (custom theme)', // @translate
                         'value' => 'none',
@@ -188,9 +192,13 @@ class Module extends AbstractModule
     {
         $siteSettings = $this->getServiceLocator()->get('Omeka\Settings\Site');
         $enabledMethods = $siteSettings->get('sharing_methods');
+        if (!count($enabledMethods)) {
+            return;
+        }
+
         $placement = $siteSettings->get('sharing_placement', 'view.show.before');
         $eventName = $event->getName();
-        if (count($enabledMethods) && $eventName === $placement) {
+        if ($eventName === $placement) {
             /** @see \Sharing\View\Helper\Sharing */
             $view = $event->getTarget();
             echo $view->sharing();
