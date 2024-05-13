@@ -162,7 +162,10 @@ class Module extends AbstractModule
                         'label' => 'Bottom', //@translate
                         'value' => 'view.show.after',
                     ],
-
+                    'none' => [
+                        'label' => 'None (custom theme)', // @translate
+                        'value' => 'none',
+                    ],
                 ],
             ],
             'attributes' => [
