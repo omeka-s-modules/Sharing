@@ -18,6 +18,8 @@ li#sharing-pinterest span {
 
 ul#sharing-buttons li#sharing-tumblr {
     margin-right: 1px;
+    /* Fix chrome. */
+    min-width: 55px;
 }
 
 li#sharing-email a, 
