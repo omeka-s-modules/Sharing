@@ -33,12 +33,8 @@ class Sharing extends AbstractBlockLayout
 
     public function render(PhpRenderer $view, SitePageBlockRepresentation $block)
     {
-        $plugins = $view->getHelperPluginManager();
-        $sharing = $plugins->get('sharing');
-
         $page = $block->page();
         $site = $page->site();
-
         return $view->partial(self::PARTIAL_NAME, [
             'site' => $site,
             'page' => $page,
