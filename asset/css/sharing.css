@@ -18,8 +18,21 @@ li#sharing-pinterest span {
 
 ul#sharing-buttons li#sharing-tumblr {
     margin-right: 1px;
-    /* Fix chrome. */
+}
+
+/* Fix loading hidden iframe in chrome. */
+ul#sharing-buttons > li > div,
+ul#sharing-buttons > li iframe {
+    position: static;
+    visibility: visible;
     min-width: 55px;
+    min-height: 20px;
+}
+ul#sharing-buttons li#sharing-twitter > iframe {
+    min-width: 65px;
+    min-height: 20px;
+    width: 65px !important;
+    height: 20px !important;
 }
 
 li#sharing-email a, 

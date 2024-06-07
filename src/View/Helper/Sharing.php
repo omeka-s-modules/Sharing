@@ -36,8 +36,8 @@ class Sharing extends AbstractHelper
             $script = <<<'JS'
             window.fbAsyncInit = function() {
                 FB.init({
-                    xfbml      : true,
-                    version    : 'v2.5'
+                    xfbml: true,
+                    version: 'v2.5',
                 });
             };
             (function(d, s, id){
@@ -52,7 +52,8 @@ class Sharing extends AbstractHelper
         }
 
         if (in_array('twitter', $enabledMethods)) {
-            $headScript->appendFile('https://platform.twitter.com/widgets.js');
+            // FIXME In chrome, with or without defer/async, the button won't display in some cases in particular when preloaded and hidden in the single button.
+            $headScript->appendFile('https://platform.twitter.com/widgets.js', 'text/javascript', ['id' => 'twitter-js', 'defer' => 'defer', 'async' => 'async']);
         }
 
         if (in_array('tumblr', $enabledMethods)) {
