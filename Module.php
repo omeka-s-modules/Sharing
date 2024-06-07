@@ -102,7 +102,10 @@ class Module extends AbstractModule
         $form->setOption('element_groups', $groups);
 
         $enabledMethods = $siteSettings->get('sharing_methods', []);
-        $placement = $siteSettings->get('sharing_placement', 'view.show.before');
+        $placement = $siteSettings->get('sharing_placement', 'block');
+        if (!in_array($placement, ['view.show.before', 'view.show.after', 'default'])) {
+            $placement = 'default';
+        }
         $display = (int) $siteSettings->get('sharing_display_as_button', 0);
 
         $form->add([
@@ -110,7 +113,8 @@ class Module extends AbstractModule
             'type' => 'multiCheckbox',
             'options' => [
                 'element_group' => 'sharing',
-                'label' => 'Enable Sharing module for these methods', // @translate
+                'label' => 'Sharing buttons', // @translate
+                'info' => 'Select which sharing buttons to display.', // @translate
                 'value_options' => [
                     'fb' => [
                         'label' => 'Facebook', // @translate
@@ -154,7 +158,8 @@ class Module extends AbstractModule
             'type' => 'radio',
             'options' => [
                 'element_group' => 'sharing',
-                'label' => "Sharing buttons placement on the page", // @translate
+                'label' => "Sharing buttons placement", // @translate
+                'info' => 'Select "Top" to place the buttons on the top of public resource show pages. Select "Bottom" to place the buttons on the bottom of resource show pages. Select "Default" to place the buttons only via page blocks and resource blocks', // @translate
                 'value_options' => [
                     'top' => [
                         'label' => 'Top', // @translate
@@ -165,12 +170,8 @@ class Module extends AbstractModule
                         'value' => 'view.show.after',
                     ],
                     'block' => [
-                        'label' => 'Page block and resource block', // @translate
-                        'value' => 'block',
-                    ],
-                    'none' => [
-                        'label' => 'None (custom theme)', // @translate
-                        'value' => 'none',
+                        'label' => 'Default', // @translate
+                        'value' => 'default',
                     ],
                 ],
             ],
@@ -185,7 +186,8 @@ class Module extends AbstractModule
             'type' => 'checkbox',
             'options' => [
                 'element_group' => 'sharing',
-                'label' => "Display sharing buttons as a single button", // @translate
+                'label' => 'Single button', // @translate
+                'info' => "Check to display all sharing buttons as a single share button", // @translate
             ],
             'attributes' => [
                 'id' => 'sharing_display_as_button',
