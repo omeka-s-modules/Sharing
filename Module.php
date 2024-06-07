@@ -207,7 +207,7 @@ class Module extends AbstractModule
     public function addSharingMethods(Event $event)
     {
         $siteSettings = $this->getServiceLocator()->get('Omeka\Settings\Site');
-        $enabledMethods = $siteSettings->get('sharing_methods');
+        $enabledMethods = $siteSettings->get('sharing_methods', []);
         if (!count($enabledMethods)) {
             return;
         }
