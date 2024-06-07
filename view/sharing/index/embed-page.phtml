@@ -25,7 +25,7 @@ $escape = $this->plugin('escapeHtml');
         </div>
         <?php
         foreach ($this->page->blocks() as $block) {
-            foreach($block->attachments() as $attachment) {
+            foreach ($block->attachments() as $attachment) {
                 $item = $attachment->item();
                 if ($primaryMedia = $item->primaryMedia()) {
                     $image = $escape($primaryMedia->thumbnailUrl('square'));

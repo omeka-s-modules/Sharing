@@ -20,6 +20,21 @@ ul#sharing-buttons li#sharing-tumblr {
     margin-right: 1px;
 }
 
+/* Fix loading hidden iframe in chrome. */
+ul#sharing-buttons > li > div,
+ul#sharing-buttons > li iframe {
+    position: static;
+    visibility: visible;
+    min-width: 55px;
+    min-height: 20px;
+}
+ul#sharing-buttons li#sharing-twitter > iframe {
+    min-width: 65px;
+    min-height: 20px;
+    width: 65px !important;
+    height: 20px !important;
+}
+
 li#sharing-email a, 
 li#sharing-embed a {
     font-size: 11px;
@@ -68,4 +83,37 @@ li#sharing-embed a:before {
     content: "\f121";
     font-family: "Font Awesome 5 Free";
     font-weight: normal;
+}
+
+.sharing-details {
+    display: inline-block;
+    cursor: pointer;
+}
+.sharing-details summary {
+    display: inline-block;
+    height: 45px;
+    padding: 7.5px;
+    border: 0;
+    border-radius: 2px;
+}
+.sharing-details[open] summary,
+.sharing-details summary:hover {
+    background-color: #dedede;
+}
+.sharing-details[open] > ul {
+    display: flex;
+    position: absolute;
+    z-index: 10;
+    overflow: visible;
+    cursor: auto;
+    min-height: 48px;
+    padding: 15px;
+    border: 1px solid #DCD6CA;
+    background: #EEE;
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2);
+}
+.sharing-details[open] > ul#sharing-buttons {
+    padding-left: 15px;
+    margin-top: 3px;
 }

@@ -102,13 +102,19 @@ class Module extends AbstractModule
         $form->setOption('element_groups', $groups);
 
         $enabledMethods = $siteSettings->get('sharing_methods', []);
-        $placement = $siteSettings->get('sharing_placement', 'view.show.before');
+        $placement = $siteSettings->get('sharing_placement', 'block');
+        if (!in_array($placement, ['view.show.before', 'view.show.after', 'default'])) {
+            $placement = 'default';
+        }
+        $display = (int) $siteSettings->get('sharing_display_as_button', 0);
+
         $form->add([
             'name' => 'sharing_methods',
             'type' => 'multiCheckbox',
             'options' => [
                 'element_group' => 'sharing',
-                'label' => 'Enable Sharing module for these methods', // @translate
+                'label' => 'Sharing buttons', // @translate
+                'info' => 'Select which sharing buttons to display.', // @translate
                 'value_options' => [
                     'fb' => [
                         'label' => 'Facebook', // @translate
@@ -152,7 +158,8 @@ class Module extends AbstractModule
             'type' => 'radio',
             'options' => [
                 'element_group' => 'sharing',
-                'label' => "Sharing buttons placement on the page", // @translate
+                'label' => "Sharing buttons placement", // @translate
+                'info' => 'Select "Top" to place the buttons on the top of public resource show pages. Select "Bottom" to place the buttons on the bottom of resource show pages. Select "Default" to place the buttons only via page blocks and resource blocks', // @translate
                 'value_options' => [
                     'top' => [
                         'label' => 'Top', // @translate
@@ -162,12 +169,30 @@ class Module extends AbstractModule
                         'label' => 'Bottom', //@translate
                         'value' => 'view.show.after',
                     ],
-
+                    'block' => [
+                        'label' => 'Default', // @translate
+                        'value' => 'default',
+                    ],
                 ],
             ],
             'attributes' => [
                 'required' => false,
                 'value' => $placement,
+            ],
+        ]);
+
+        $form->add([
+            'name' => 'sharing_display_as_button',
+            'type' => 'checkbox',
+            'options' => [
+                'element_group' => 'sharing',
+                'label' => 'Single button', // @translate
+                'info' => "Check to display all sharing buttons as a single share button", // @translate
+            ],
+            'attributes' => [
+                'id' => 'sharing_display_as_button',
+                'required' => false,
+                'value' => $display,
             ],
         ]);
     }
@@ -184,56 +209,17 @@ class Module extends AbstractModule
     public function addSharingMethods(Event $event)
     {
         $siteSettings = $this->getServiceLocator()->get('Omeka\Settings\Site');
-        $enabledMethods = $siteSettings->get('sharing_methods');
+        $enabledMethods = $siteSettings->get('sharing_methods', []);
+        if (!count($enabledMethods)) {
+            return;
+        }
+
         $placement = $siteSettings->get('sharing_placement', 'view.show.before');
         $eventName = $event->getName();
-        if (!empty($enabledMethods) && ($eventName == $placement)) {
+        if ($eventName === $placement) {
+            /** @see \Sharing\View\Helper\Sharing */
             $view = $event->getTarget();
-            $view->headScript()->appendFile('https://platform.twitter.com/widgets.js');
-            $view->headScript()->appendFile($view->assetUrl('js/sharing.js', 'Sharing'));
-            $view->headLink()->appendStylesheet($view->assetUrl('css/sharing.css', 'Sharing'));
-            $siteSlug = $this->getServiceLocator()->get('Application')
-                ->getMvcEvent()->getRouteMatch()->getParam('site-slug');
-            echo $view->partial('share-buttons', [
-                'enabledMethods' => $enabledMethods,
-                'itemId' => isset($view->item) ? $view->item->id() : false,
-                'mediaId' => isset($view->media) ? $view->media->id() : false,
-                'pageId' => isset($view->page) ? $view->page->id() : false,
-                'siteSlug' => $siteSlug,
-            ]);
-            $fbJavascript = "
-            <script>
-              window.fbAsyncInit = function() {
-                FB.init({
-                  xfbml      : true,
-                  version    : 'v2.5'
-                });
-              };
-              (function(d, s, id){
-                 var js, fjs = d.getElementsByTagName(s)[0];
-                 if (d.getElementById(id)) {return;}
-                 js = d.createElement(s); js.id = id;
-                 js.src = '//connect.facebook.net/en_US/sdk.js';
-                 fjs.parentNode.insertBefore(js, fjs);
-               }(document, 'script', 'facebook-jssdk'));
-            </script>
-            ";
-            $pinterestJavascript = '
-                <script
-                    type="text/javascript"
-                    async defer
-                    src="//assets.pinterest.com/js/pinit.js"
-                ></script>
-            ';
-            $tumblrJavascript = '
-                <script id="tumblr-js" async src="https://assets.tumblr.com/share-button.js"></script>
-            ';
-            foreach ($enabledMethods as $method) {
-                $js = $method . 'Javascript';
-                if (isset($$js)) {
-                    echo $$js;
-                }
-            }
+            echo $view->sharing();
         }
     }
 
@@ -303,9 +289,7 @@ class Module extends AbstractModule
      */
     public function addOembedHeadLink(Event $event)
     {
-        $status = $this->getServiceLocator()->get('Omeka\Status');
         $view = $event->getTarget();
-        $controller = $status->getRouteMatch()->getParam('controller');
 
         $href = $view->url('oembed', [], ['force_canonical' => true, 'query' => ['url' => $view->serverUrl(true)]]);
         $view->headLink([

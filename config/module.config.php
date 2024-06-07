@@ -12,14 +12,19 @@ return [
             'ViewJsonStrategy',
         ],
     ],
-    'translator' => [
-        'translation_file_patterns' => [
-            [
-                'type' => 'gettext',
-                'base_dir' => sprintf('%s/../language', __DIR__),
-                'pattern' => '%s.mo',
-                'text_domain' => null,
-            ],
+    'view_helpers' => [
+        'invokables' => [
+            'sharing' => View\Helper\Sharing::class,
+        ],
+    ],
+    'block_layouts' => [
+        'invokables' => [
+            'selection' => Site\BlockLayout\Sharing::class,
+        ],
+    ],
+    'resource_page_block_layouts' => [
+        'invokables' => [
+            'sharing' => Site\ResourcePageBlockLayout\Sharing::class,
         ],
     ],
     'controllers' => [
@@ -72,6 +77,16 @@ return [
                         'action' => 'index',
                     ],
                 ],
+            ],
+        ],
+    ],
+    'translator' => [
+        'translation_file_patterns' => [
+            [
+                'type' => 'gettext',
+                'base_dir' => sprintf('%s/../language', __DIR__),
+                'pattern' => '%s.mo',
+                'text_domain' => null,
             ],
         ],
     ],

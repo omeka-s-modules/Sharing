@@ -7,6 +7,6 @@
             embedCode = "<iframe src='" + embedUrl + "'></iframe>";
             alert(embedCode);
         });
-    });
 
+    });
 })(jQuery);
