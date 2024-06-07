@@ -4,17 +4,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Angela-Marina Batarelo <angela-marina.batarelo@ericsson.com>, 2021
 # Josip Ilic <josip.ilic@ericsson.com>, 2021
+# Angela-Marina Batarelo <angela-marina.batarelo@ericsson.com>, 2021
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-04 13:51-0400\n"
+"POT-Creation-Date: 2024-06-07 13:56-0400\n"
 "PO-Revision-Date: 2017-09-14 19:41+0000\n"
-"Last-Translator: Josip Ilic <josip.ilic@ericsson.com>, 2021\n"
+"Last-Translator: Angela-Marina Batarelo <angela-marina.batarelo@ericsson.com>, 2021\n"
 "Language-Team: Croatian (https://app.transifex.com/omeka/teams/14184/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,12 @@ msgstr ""
 "Language: hr\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: view/share-buttons.phtml:74
+#: src/Site/BlockLayout/Sharing.php:30
+msgid ""
+"Display the share buttons of the current page according to site settings."
+msgstr ""
+
+#: view/common/share-buttons.phtml:80
 msgid "Get embed code"
 msgstr "Dohvatite kod za ugradnju"
 
@@ -40,50 +45,55 @@ msgstr ""
 " \n"
 " "
 
-#: Module.php:101
+#: Module.php:101 src/Site/BlockLayout/Sharing.php:20
+#: src/Site/ResourcePageBlockLayout/Sharing.php:13
 msgid "Sharing"
 msgstr "Dijeljenje"
 
-#: Module.php:111
-msgid "Enable Sharing module for these methods"
-msgstr "Omogućite modul za Dijeljenje za ove metode."
+#: Module.php:116
+msgid "Sharing buttons"
+msgstr ""
 
-#: Module.php:114
+#: Module.php:117
+msgid "Select which sharing buttons to display."
+msgstr ""
+
+#: Module.php:120
 msgid "Facebook"
 msgstr "Facebook"
 
-#: Module.php:119
+#: Module.php:125
 msgid "Twitter"
 msgstr "Twitter"
 
-#: Module.php:124
+#: Module.php:130
 msgid "Tumblr"
 msgstr "Tumblr"
 
-#: Module.php:129
+#: Module.php:135
 msgid "Pinterest"
 msgstr "Pinterest"
 
-#: Module.php:139
+#: Module.php:145
 msgid "Embed codes"
 msgstr "Kodovi za ugradnju"
 
-#: Module.php:155
-msgid "Sharing buttons placement on the page"
+#: Module.php:161
+msgid "Sharing buttons placement"
 msgstr ""
-"Dijeljenje smještaja gumba na stranici\n"
-" \n"
-"\n"
-" \n"
-" \n"
-" \n"
-" \n"
-" "
-
-#: Module.php:158
-msgid "Top"
-msgstr "Vrh"
 
 #: Module.php:162
-msgid "Bottom"
-msgstr "Dno"
+msgid ""
+"Select \"Top\" to place the buttons on the top of public resource show "
+"pages. Select \"Bottom\" to place the buttons on the bottom of resource show"
+" pages. Select \"Default\" to place the buttons only via page blocks and "
+"resource blocks"
+msgstr ""
+
+#: Module.php:189
+msgid "Single button"
+msgstr ""
+
+#: Module.php:190
+msgid "Check to display all sharing buttons as a single share button"
+msgstr ""
