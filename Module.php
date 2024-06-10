@@ -102,10 +102,7 @@ class Module extends AbstractModule
         $form->setOption('element_groups', $groups);
 
         $enabledMethods = $siteSettings->get('sharing_methods', []);
-        $placement = $siteSettings->get('sharing_placement', 'block');
-        if (!in_array($placement, ['view.show.before', 'view.show.after', 'default'])) {
-            $placement = 'default';
-        }
+        $placement = $siteSettings->get('sharing_placement', '');
         $display = (int) $siteSettings->get('sharing_display_as_button', 0);
 
         $form->add([
@@ -159,20 +156,11 @@ class Module extends AbstractModule
             'options' => [
                 'element_group' => 'sharing',
                 'label' => "Sharing buttons placement", // @translate
-                'info' => 'Select "Top" to place the buttons on the top of public resource show pages. Select "Bottom" to place the buttons on the bottom of resource show pages. Select "Default" to place the buttons only via page blocks and resource blocks', // @translate
+                'info' => 'Select "Top" or "Bottom" to place the buttons on site pages, item show pages, and media show pages. Select "Using blocks" to place the buttons using page blocks and resource blocks', // @translate
                 'value_options' => [
-                    'top' => [
-                        'label' => 'Top', // @translate
-                        'value' => 'view.show.before',
-                    ],
-                    'bottom' => [
-                        'label' => 'Bottom', //@translate
-                        'value' => 'view.show.after',
-                    ],
-                    'block' => [
-                        'label' => 'Default', // @translate
-                        'value' => 'default',
-                    ],
+                    'view.show.before' => 'Top', // @translate
+                    'view.show.after' => 'Bottom', //@translate
+                    '' => 'Using blocks', // @translate
                 ],
             ],
             'attributes' => [
@@ -202,6 +190,10 @@ class Module extends AbstractModule
         $inputFilter = $event->getParam('inputFilter');
         $inputFilter->add([
             'name' => 'sharing_methods',
+            'required' => false,
+        ]);
+        $inputFilter->add([
+            'name' => 'sharing_placement',
             'required' => false,
         ]);
     }
