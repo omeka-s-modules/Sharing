@@ -90,6 +90,18 @@ class Module extends AbstractModule
                 [$this, 'addOembedHeadLink']
             );
         }
+
+        // Copy Sharing-related data for the CopyResources module.
+        $sharedEventManager->attach(
+            '*',
+            'copy_resources.sites.post',
+            function (Event $event) {
+                $copyResources = $event->getParam('copy_resources');
+                $siteCopy = $event->getParam('resource_copy');
+
+                $copyResources->revertSiteBlockLayouts($siteCopy->id(), 'sharing');
+            }
+        );
     }
 
     public function addSiteSettingsForm(Event $event)
