@@ -19,7 +19,7 @@ return [
     ],
     'block_layouts' => [
         'invokables' => [
-            'selection' => Site\BlockLayout\Sharing::class,
+            'sharing' => Site\BlockLayout\Sharing::class,
         ],
     ],
     'resource_page_block_layouts' => [
