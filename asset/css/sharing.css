@@ -1,10 +1,11 @@
 ul#sharing-buttons {
     list-style: none;
     line-height: 20px;
-    height: 20px;
     padding-left: 0px;
+    margin-left: 0px;
     clear: both;
     display: flex;
+    flex-wrap: wrap;
 }
 
 ul#sharing-buttons li {
@@ -18,21 +19,6 @@ li#sharing-pinterest span {
 
 ul#sharing-buttons li#sharing-tumblr {
     margin-right: 1px;
-}
-
-/* Fix loading hidden iframe in chrome. */
-ul#sharing-buttons > li > div,
-ul#sharing-buttons > li iframe {
-    position: static;
-    visibility: visible;
-    min-width: 55px;
-    min-height: 20px;
-}
-ul#sharing-buttons li#sharing-twitter > iframe {
-    min-width: 65px;
-    min-height: 20px;
-    width: 65px !important;
-    height: 20px !important;
 }
 
 li#sharing-email a, 
@@ -64,7 +50,8 @@ li#sharing-email a:hover {
 li#sharing-email a:before {
     content: "\f0e0";
     font-family: "Font Awesome 5 Free";
-    font-weight: normal;
+    font-weight: 900;
+    margin-right: 3px;
 }
 
 li#sharing-embed a {
@@ -82,7 +69,8 @@ li#sharing-embed a:hover {
 li#sharing-embed a:before {
     content: "\f121";
     font-family: "Font Awesome 5 Free";
-    font-weight: normal;
+    font-weight: 900;
+    margin-right: 3px;
 }
 
 .sharing-details {
