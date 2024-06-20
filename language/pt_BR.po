@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-07 13:56-0400\n"
+"POT-Creation-Date: 2024-06-20 15:28-0400\n"
 "PO-Revision-Date: 2017-09-14 19:41+0000\n"
 "Last-Translator: Deidson Rafael Trindade <drafael@usp.br>, 2020\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/omeka/teams/14184/pt_BR/)\n"
@@ -38,49 +38,52 @@ msgstr ""
 "As opções de compartilhamento são específicas do site. Os proprietários do "
 "site precisarão definir as opções para seus sites."
 
-#: Module.php:101 src/Site/BlockLayout/Sharing.php:20
+#: Module.php:113 src/Site/BlockLayout/Sharing.php:20
 #: src/Site/ResourcePageBlockLayout/Sharing.php:13
 msgid "Sharing"
 msgstr "Compartilhar"
 
-#: Module.php:116
+#: Module.php:125
 msgid "Sharing buttons"
 msgstr ""
 
-#: Module.php:117
+#: Module.php:126
 msgid "Select which sharing buttons to display."
 msgstr ""
 
-#: Module.php:120
+#: Module.php:129
 msgid "Facebook"
 msgstr "Facebook"
 
-#: Module.php:125
+#: Module.php:134
 msgid "Twitter"
 msgstr "Twitter"
 
-#: Module.php:130
+#: Module.php:139
 msgid "Tumblr"
 msgstr "Tumblr"
 
-#: Module.php:135
+#: Module.php:144
 msgid "Pinterest"
 msgstr "Pinterest"
 
-#: Module.php:145
+#: Module.php:154
 msgid "Embed codes"
 msgstr "Códigos incorporados"
 
-#: Module.php:161
+#: Module.php:170
 msgid "Sharing buttons placement"
 msgstr ""
 
-#: Module.php:162
+#: Module.php:171
 msgid ""
-"Select \"Top\" to place the buttons on the top of public resource show "
-"pages. Select \"Bottom\" to place the buttons on the bottom of resource show"
-" pages. Select \"Default\" to place the buttons only via page blocks and "
-"resource blocks"
+"Select \"Top\" or \"Bottom\" to place the buttons on site pages, item show "
+"pages, and media show pages. Select \"Using blocks\" to place the buttons "
+"using page blocks and resource blocks"
+msgstr ""
+
+#: Module.php:175
+msgid "Using blocks"
 msgstr ""
 
 #: Module.php:189
