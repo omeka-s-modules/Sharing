@@ -1,6 +1,6 @@
 ul#sharing-buttons {
     list-style: none;
-    line-height: 20px;
+    line-height: 1;
     padding-left: 0px;
     margin-left: 0px;
     clear: both;
@@ -56,9 +56,8 @@ li#sharing-email a:before {
 
 li#sharing-embed a {
     background-color: #fff;
-    border: 1px solid #c2c2c2;
+    box-shadow: 0 0 0 1px #c2c2c2 inset;
     border-radius: 3px;
-    line-height: 18px;
 }
 
 li#sharing-embed a:hover {
@@ -77,31 +76,47 @@ li#sharing-embed a:before {
     display: inline-block;
     cursor: pointer;
 }
+
 .sharing-details summary {
+    list-style: none;
+}
+
+.sharing-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.sharing-details summary:after {
+    content: "\f0da";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
     display: inline-block;
-    height: 45px;
-    padding: 7.5px;
-    border: 0;
-    border-radius: 2px;
+    margin-left: 12px;
+    width: 12px;
+    text-align: center;
 }
-.sharing-details[open] summary,
-.sharing-details summary:hover {
-    background-color: #dedede;
-}
+
 .sharing-details[open] > ul {
     display: flex;
     position: absolute;
     z-index: 10;
     overflow: visible;
     cursor: auto;
-    min-height: 48px;
     padding: 15px;
-    border: 1px solid #DCD6CA;
-    background: #EEE;
-    background-color: #FFFFFF;
+    background-color: #fff;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2);
 }
+
+.sharing-details[open] summary:after {
+    content: "\f0d7";
+}
+
 .sharing-details[open] > ul#sharing-buttons {
     padding-left: 15px;
     margin-top: 3px;
+}
+
+.sharing-details .sharing-button {
+    margin-bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
 }
